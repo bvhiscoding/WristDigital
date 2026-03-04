@@ -65,14 +65,13 @@ const couponSchema = new mongoose.Schema(
 
 couponSchema.index({ isActive: 1, startsAt: 1, endsAt: 1 });
 
-couponSchema.pre("validate", function (next) {
+couponSchema.pre("validate", function () {
   if (this.endsAt && this.startsAt && this.endsAt <= this.startsAt) {
-    return next(new Error("Coupon endsAt must be greater than startsAt"));
+    throw new Error("Coupon endsAt must be greater than startsAt");
   }
   if (this.discountType === "PERCENT" && this.discountValue > 100) {
-    return next(new Error("Percent coupon cannot exceed 100"));
+    throw new Error("Percent coupon cannot exceed 100");
   }
-  next();
 });
 
 module.exports = mongoose.model("Coupon", couponSchema);

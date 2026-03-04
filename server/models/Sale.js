@@ -49,28 +49,26 @@ const saleSchema = new mongoose.Schema(
 
 saleSchema.index({ isActive: 1, startsAt: 1, endsAt: 1, priority: -1 });
 
-saleSchema.pre("validate", function (next) {
+saleSchema.pre("validate", function () {
   if (this.endsAt && this.startsAt && this.endsAt <= this.startsAt) {
-    return next(new Error("Sale endsAt must be greater than startsAt"));
+    throw new Error("Sale endsAt must be greater than startsAt");
   }
   if (this.discountType === "PERCENT" && this.discountValue > 100) {
-    return next(new Error("Percent sale cannot exceed 100"));
+    throw new Error("Percent sale cannot exceed 100");
   }
 
   if (this.scope === "PRODUCTS" && (!this.productIds || this.productIds.length === 0)) {
-    return next(new Error("productIds is required for PRODUCTS scope"));
+    throw new Error("productIds is required for PRODUCTS scope");
   }
   if (
     this.scope === "CATEGORIES" &&
     (!this.categoryIds || this.categoryIds.length === 0)
   ) {
-    return next(new Error("categoryIds is required for CATEGORIES scope"));
+    throw new Error("categoryIds is required for CATEGORIES scope");
   }
   if (this.scope === "BRANDS" && (!this.brandIds || this.brandIds.length === 0)) {
-    return next(new Error("brandIds is required for BRANDS scope"));
+    throw new Error("brandIds is required for BRANDS scope");
   }
-
-  next();
 });
 
 module.exports = mongoose.model("Sale", saleSchema);
