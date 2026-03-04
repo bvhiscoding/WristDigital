@@ -15,7 +15,7 @@ const updateMe = async (userId, payload) => {
     Object.entries(payload).filter(([key]) => allowed.includes(key)),
   );
   const user = await User.findByIdAndUpdate(userId, update, {
-    new: true,
+    returnDocument: "after",
   });
   if (!user) {
     throw new ApiError(404, "User not found");

@@ -32,7 +32,7 @@ const createProductSchema = z.object({
   productType: z.enum(["Smartwatch", "Accessory"]),
   stockQuantity: z.number().int().nonnegative().optional(),
   images: z.array(z.string().url()).optional(),
-  specifications: z.record(z.any()).optional(),
+  specifications: z.record(z.string(), z.any()).optional(),
   colors: z
     .array(
       z.object({
@@ -55,10 +55,23 @@ const productQuerySchema = z.object({
   page: z.coerce.number().int().min(1).optional(),
   limit: z.coerce.number().int().min(1).max(100).optional(),
 });
+const updateStockSchema = z
+  .object({
+    stockQuantity: z.number().int().nonnegative().optional(),
+    isActive: z.boolean().optional(),
+  })
+  .refine(
+    (value) =>
+      value.stockQuantity !== undefined || value.isActive !== undefined,
+    {
+      message: "At least one field is required: stockQuantity or isActive",
+    },
+  );
 module.exports = {
   idParamSchema,
   createBrandSchema,
   createCategorySchema,
   createProductSchema,
   productQuerySchema,
+  updateStockSchema,
 };

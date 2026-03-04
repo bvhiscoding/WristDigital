@@ -1,0 +1,71 @@
+const Brand = require("../models/Brand");
+const Product = require("../models/Product");
+const ApiError = require("../utils/ApiError");
+
+const normalizeSlug = (slug) =>
+  String(slug || "")
+    .trim()
+    .toLowerCase();
+
+const createBrand = async (payload) => {
+  const data = { ...payload, slug: normalizeSlug(payload.slug) };
+
+  const brandExist = await Brand.findOne({
+    $or: [{ name: data.name }, { slug: data.slug }],
+  });
+  if (brandExist) {
+    throw new ApiError(400, "Brand name or slug already exists");
+  }
+
+  const brand = await Brand.create(data);
+  return brand;
+};
+
+const getBrands = async () => {
+  const brands = await Brand.find({ isActive: true }).sort({ createdAt: -1 });
+  return brands;
+};
+
+const updateBrandById = async (id, payload) => {
+  const update = { ...payload };
+  if (update.slug) update.slug = normalizeSlug(update.slug);
+  const brand = await Brand.findById(id);
+  if (!brand) {
+    throw new ApiError(404, "Brand not found");
+  }
+
+  if (update.name || update.slug) {
+    const duplicate = await Brand.findOne({
+      _id: { $ne: id },
+      $or: [
+        ...(update.name ? [{ name: update.name }] : []),
+        ...(update.slug ? [{ slug: update.slug }] : []),
+      ],
+    });
+    if (duplicate) {
+      throw new ApiError(400, "Brand name or slug already exists");
+    }
+  }
+  const updatedBrand = await Brand.findByIdAndUpdate(id, update, {
+    returnDocument: "after",
+    runValidators: true,
+  });
+  return updatedBrand;
+};
+
+const deleteBrandById = async (id) => {
+  const brand = await Brand.findById(id);
+  if (!brand) throw new ApiError(404, "Brand not found");
+  const isUsed = await Product.exists({ brand: id });
+  if (isUsed) {
+    throw new ApiError(400, "Cannot delete brand in use by products");
+  }
+  await Brand.findByIdAndDelete(id);
+  return { message: "Brand deleted successfully" };
+};
+module.exports = {
+  createBrand,
+  getBrands,
+  updateBrandById,
+  deleteBrandById,
+};
