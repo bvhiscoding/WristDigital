@@ -3,6 +3,7 @@ const Brand = require("../../models/Brand");
 const Category = require("../../models/Category");
 const ApiError = require("../../utils/ApiError");
 const cloudinary = require("../../config/cloudinary");
+const { recalculateProductSaleSnapshots } = require("../pricing.service");
 
 const normalizeSlug = (slug) =>
   String(slug || "")
@@ -63,6 +64,7 @@ const createProduct = async (payload, files = []) => {
     ...uploadedUrls,
   ];
   const product = await Product.create(data);
+  await recalculateProductSaleSnapshots({ productIds: [product._id] });
   return product;
 };
 
@@ -112,6 +114,7 @@ const updateProductById = async (id, payload, files = []) => {
   })
     .populate("brand", "name slug")
     .populate("category", "name slug");
+  await recalculateProductSaleSnapshots({ productIds: [product._id] });
   return product;
 };
 
@@ -135,6 +138,7 @@ const deleteProductById = async (id) => {
   }
   product.isActive = false;
   await product.save();
+  await recalculateProductSaleSnapshots({ productIds: [product._id] });
   return { message: "Product hidden successfully" };
 };
 module.exports = {

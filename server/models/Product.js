@@ -7,6 +7,21 @@ const colorSchema = new mongoose.Schema(
   },
   { _id: false },
 );
+
+const activeSaleSchema = new mongoose.Schema(
+  {
+    saleId: { type: mongoose.Schema.Types.ObjectId, ref: "Sale" },
+    saleName: { type: String, default: "" },
+    discountType: { type: String, enum: ["PERCENT", "FIXED"] },
+    discountValue: { type: Number, min: 0 },
+    salePrice: { type: Number, min: 0 },
+    startsAt: { type: Date },
+    endsAt: { type: Date },
+    priority: { type: Number, default: 0 },
+  },
+  { _id: false },
+);
+
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: [true, "Product name is required"], trim: true },
@@ -42,10 +57,40 @@ const productSchema = new mongoose.Schema(
     numReviews: { type: Number, default: 0 },
     specifications: { type: mongoose.Schema.Types.Mixed, default: {} },
     colors: [colorSchema],
+    activeSale: { type: activeSaleSchema, default: null },
     isActive: { type: Boolean, default: true },
   },
-  { timestamps: true },
+  {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  },
 );
+
+productSchema.virtual("baseSellPrice").get(function () {
+  return this.discountPrice != null ? this.discountPrice : this.price;
+});
+
+productSchema.virtual("displayPrice").get(function () {
+  const base = this.baseSellPrice;
+  if (!this.activeSale) return base;
+
+  const now = new Date();
+  const isSaleValid =
+    this.activeSale.startsAt &&
+    this.activeSale.endsAt &&
+    this.activeSale.startsAt <= now &&
+    this.activeSale.endsAt > now;
+
+  if (!isSaleValid) return base;
+
+  return Math.min(base, this.activeSale.salePrice || base);
+});
+
+productSchema.virtual("isOnSale").get(function () {
+  return this.displayPrice < this.baseSellPrice;
+});
+
 productSchema.index({ name: "text", description: "text" });
 productSchema.index({ brand: 1, category: 1, price: 1, isActive: 1 });
 module.exports = mongoose.model("Product", productSchema);

@@ -26,6 +26,7 @@ const checkoutSchema = z.object({
   }),
   paymentMethod: z.enum(["COD", "BANK_TRANSFER"]).optional().default("COD"),
   note: z.string().max(500).optional().default(""),
+  couponCode: z.string().min(3).max(30).optional(),
 });
 const orderQuerySchema = z.object({
   status: z.enum(["Processing", "Shipped", "Cancelled"]).optional(),

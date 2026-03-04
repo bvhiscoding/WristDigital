@@ -44,6 +44,17 @@ const shippingAddressSchema = new mongoose.Schema(
   },
   { _id: false },
 );
+
+const appliedCouponSchema = new mongoose.Schema(
+  {
+    code: { type: String, required: true },
+    discountType: { type: String, enum: ["PERCENT", "FIXED"], required: true },
+    discountValue: { type: Number, required: true, min: 0 },
+    discountAmount: { type: Number, required: true, min: 0 },
+  },
+  { _id: false },
+);
+
 const orderSchema = new mongoose.Schema(
   {
     user: {
@@ -61,10 +72,17 @@ const orderSchema = new mongoose.Schema(
       },
     },
     pricing: {
+      subtotalRaw: { type: Number, required: true, min: 0 },
+      saleDiscount: { type: Number, default: 0, min: 0 },
       subtotal: { type: Number, required: true, min: 0 },
+      couponDiscount: { type: Number, default: 0, min: 0 },
       shippingFee: { type: Number, default: 0, min: 0 },
       discount: { type: Number, default: 0, min: 0 },
       total: { type: Number, required: true, min: 0 },
+    },
+    coupon: {
+      type: appliedCouponSchema,
+      default: null,
     },
     shippingAddress: {
       type: shippingAddressSchema,
@@ -98,4 +116,5 @@ const orderSchema = new mongoose.Schema(
 );
 orderSchema.index({ user: 1, createdAt: -1 });
 orderSchema.index({ status: 1, createdAt: -1 });
+orderSchema.index({ "coupon.code": 1 });
 module.exports = mongoose.model("Order", orderSchema);
