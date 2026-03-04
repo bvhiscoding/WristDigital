@@ -12,6 +12,8 @@ const validate = (schema) => {
       const result = schema.body.safeParse(req.body);
       if (!result.success) {
         errors.push(...collectErrors(result));
+      } else {
+        req.body = result.data;
       }
     }
     // Validate req.query
@@ -19,6 +21,8 @@ const validate = (schema) => {
       const result = schema.query.safeParse(req.query);
       if (!result.success) {
         errors.push(...collectErrors(result));
+      } else {
+        req.query = result.data;
       }
     }
     // Validate req.params
@@ -26,6 +30,8 @@ const validate = (schema) => {
       const result = schema.params.safeParse(req.params);
       if (!result.success) {
         errors.push(...collectErrors(result));
+      } else {
+        req.params = result.data;
       }
     }
     if (errors.length > 0) {

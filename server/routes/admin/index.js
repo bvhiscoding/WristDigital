@@ -1,0 +1,11 @@
+const router = require("express").Router();
+const protect = require("../../middlewares/auth.middleware");
+const checkRole = require("../../middlewares/role.middleware");
+const brandAdminRoutes = require("./brand.admin.route");
+const categoryAdminRoutes = require("./category.admin.route");
+const productAdminRoutes = require("./product.admin.route");
+router.use(protect, checkRole("admin"));
+router.use("/brands", brandAdminRoutes);
+router.use("/categories", categoryAdminRoutes);
+router.use("/products", productAdminRoutes);
+module.exports = router;
