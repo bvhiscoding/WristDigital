@@ -4,6 +4,8 @@ const userRoutes = require("./user.route");
 const brandRoutes = require("./brand.route");
 const categoryRoutes = require("./category.route");
 const productRoutes = require("./product.route");
+const cartRoutes = require("./cart.route");
+const orderRoutes = require("./order.route");
 const adminRoutes = require("./admin/index");
 const router = express.Router();
 router.get("/health", (req, res) => {
@@ -14,5 +16,7 @@ router.use("/users", userRoutes);
 router.use("/brands", brandRoutes);
 router.use("/categories", categoryRoutes);
 router.use("/products", productRoutes);
+router.use("/cart", cartRoutes);
+router.use("/orders", orderRoutes);
 router.use("/admin", adminRoutes);
 module.exports = router;
