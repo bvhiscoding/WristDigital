@@ -1,7 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./config/swagger");
 const routes = require("./routes/index");
 const { notFound } = require("./utils/notFound.js");
 const { errorHandler } = require("./utils/errorHandler.js");
@@ -31,12 +34,14 @@ function sanitizeDeep(val) {
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
+app.use(mongoSanitize());
 app.use((req, _res, next) => {
   if (req.body) req.body = sanitizeDeep(req.body);
   next();
 });
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/v1", routes);
 app.use(notFound);
 app.use(errorHandler);
