@@ -8,7 +8,11 @@ const orderAdminRoutes = require("./order.admin.route");
 const couponAdminRoutes = require("./coupon.admin.route");
 const saleAdminRoutes = require("./sale.admin.route");
 const dashboardAdminRoutes = require("./dashboard.admin.route");
+const reviewAdminRoutes = require("./review.admin.route");
+const blogAdminRoutes = require("./blog.admin.route");
+
 router.use(protect, checkRole("admin"));
+
 router.use("/brands", brandAdminRoutes);
 router.use("/categories", categoryAdminRoutes);
 router.use("/products", productAdminRoutes);
@@ -16,4 +20,7 @@ router.use("/orders", orderAdminRoutes);
 router.use("/coupons", couponAdminRoutes);
 router.use("/sales", saleAdminRoutes);
 router.use("/dashboard", dashboardAdminRoutes);
+router.use("/reviews", reviewAdminRoutes);
+router.use(blogAdminRoutes);
+
 module.exports = router;
