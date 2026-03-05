@@ -13,75 +13,77 @@ const imgFrame3 = "http://localhost:3845/assets/d6e4a8b1c97c77ca848c324fa31062cd
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full h-[924px] bg-[#0c1950] overflow-hidden flex justify-center">
+    <section className="relative w-full min-h-[100vh] lg:min-h-[57.75rem] bg-[#0c1950] overflow-hidden flex justify-center py-[4rem] lg:py-0">
       {/* Background Glows (Ellipses) */}
-      <div className="absolute pointer-events-none -top-[200px] left-[200px] md:left-[461px] w-[530px] h-[534px] mix-blend-screen opacity-50">
+      <div className="absolute pointer-events-none -top-[12.5rem] left-[-5rem] lg:left-[28.8125rem] w-[20rem] lg:w-[33.125rem] h-[20rem] lg:h-[33.375rem] mix-blend-screen opacity-50">
         <img alt="" className="w-full h-full object-cover scale-[2.1]" src={imgEllipse8} />
       </div>
-      <div className="absolute pointer-events-none top-[389px] left-[100px] md:left-[360px] w-[473px] h-[493px] mix-blend-screen opacity-50">
+      <div className="absolute pointer-events-none top-[15rem] lg:top-[24.3125rem] left-[-2rem] lg:left-[22.5rem] w-[15rem] lg:w-[29.5625rem] h-[15rem] lg:h-[30.8125rem] mix-blend-screen opacity-50">
         <img alt="" className="w-full h-full object-cover scale-[2.2]" src={imgEllipse2} />
       </div>
-      <div className="absolute pointer-events-none top-[74px] right-[-100px] lg:left-[879px] w-[791px] h-[771px] mix-blend-screen opacity-50">
+      <div className="absolute pointer-events-none top-[20rem] lg:top-[4.625rem] right-[-10rem] lg:right-[-6.25rem] w-[25rem] lg:w-[49.4375rem] h-[25rem] lg:h-[48.1875rem] mix-blend-screen opacity-50">
         <img alt="" className="w-full h-full object-cover scale-[1.7]" src={imgEllipse4} />
       </div>
 
-      {/* Background Large Texts - Absolutely positioned like Figma */}
-      <div className="absolute inset-0 pointer-events-none select-none max-w-[1440px] mx-auto w-full" aria-hidden="true" style={{ fontFamily: "'League Gothic', sans-serif" }}>
-        <p className="absolute text-[150px] lg:text-[250px] leading-none text-[rgba(255,255,255,0.07)] left-[20px] lg:left-[81px] top-[40px] lg:top-[-12px]" style={{ fontVariationSettings: "'wdth' 100" }}>APPLE</p>
-        <p className="absolute text-[150px] lg:text-[250px] leading-none text-[rgba(255,255,255,0.07)] left-[20px] lg:left-[533px] top-[180px] lg:top-[-12px]" style={{ fontVariationSettings: "'wdth' 100" }}>WATCH</p>
-        <p className="absolute text-[250px] lg:text-[450px] leading-[0.85] text-[rgba(255,255,255,0.07)] right-[20px] lg:left-[1049px] top-[150px] lg:top-[-70px]" style={{ fontVariationSettings: "'wdth' 100" }}>SE</p>
-        <p className="absolute text-[300px] lg:text-[500px] leading-[0.85] text-[rgba(255,255,255,0.07)] right-[60px] lg:left-[1212px] top-[400px] lg:top-[311px]" style={{ fontVariationSettings: "'wdth' 100" }}>3</p>
+      {/* Background Large Texts - Absolutely positioned but responsive */}
+      <div className="absolute inset-0 pointer-events-none select-none max-w-[90rem] mx-auto w-full overflow-hidden" aria-hidden="true" style={{ fontFamily: "'League Gothic', sans-serif" }}>
+        <p className="absolute text-[8rem] lg:text-[15.625rem] leading-none text-[rgba(255,255,255,0.05)] left-[1rem] lg:left-[5.0625rem] top-[2rem] lg:top-[-0.75rem]" style={{ fontVariationSettings: "'wdth' 100" }}>APPLE</p>
+        <p className="absolute text-[8rem] lg:text-[15.625rem] leading-none text-[rgba(255,255,255,0.05)] left-[3rem] lg:left-[33.3125rem] top-[9rem] lg:top-[-0.75rem]" style={{ fontVariationSettings: "'wdth' 100" }}>WATCH</p>
+        <p className="hidden md:block absolute text-[12rem] lg:text-[28.125rem] leading-[0.85] text-[rgba(255,255,255,0.05)] right-[2rem] lg:left-[65.5625rem] top-[15rem] lg:top-[-4.375rem]" style={{ fontVariationSettings: "'wdth' 100" }}>SE</p>
+        <p className="hidden md:block absolute text-[15rem] lg:text-[31.25rem] leading-[0.85] text-[rgba(255,255,255,0.05)] right-[1rem] lg:left-[75.75rem] top-[26rem] lg:top-[19.4375rem]" style={{ fontVariationSettings: "'wdth' 100" }}>3</p>
       </div>
 
       {/* Main Container */}
-      <div className="relative w-full max-w-[1440px] h-full flex flex-col justify-center px-6 lg:px-[96px] z-10">
+      <div className="relative w-full max-w-[90rem] h-full flex flex-col lg:flex-row items-center justify-between px-6 lg:px-[6rem] z-10">
+        
         {/* Left Column Text Content */}
-        <div className="absolute left-[76px] top-[167px] flex flex-col max-w-full lg:w-[551px] z-10">
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left w-full lg:w-[34.4375rem] z-10 mt-[2rem] lg:mt-0">
           
-          <div className="flex items-center gap-[14px] mb-[18px]">
-            <img src={imgRectangle} alt="Apple Logo" className="w-[49px] lg:w-[66px] h-[66px] object-contain" />
-            <h2 className="text-white text-[20px] lg:text-[27px]" style={{ fontFamily: "'Lato', sans-serif" }}>
+          <div className="flex items-center gap-[0.875rem] mb-[1.125rem]">
+            <img src={imgRectangle} alt="Apple Logo" className="w-[2.5rem] lg:w-[4.125rem] h-[2.5rem] lg:h-[4.125rem] object-contain" />
+            <h2 className="text-white text-[1.25rem] lg:text-[1.6875rem]" style={{ fontFamily: "'Lato', sans-serif" }}>
               <span className="font-bold">WATCH</span> <span className="font-light">SE3</span>
             </h2>
           </div>
 
-          <h1 className="text-white text-[48px] lg:text-[70px] font-extrabold leading-[1.0] mb-[15px] lg:w-[502px]" style={{ fontFamily: "'Lato', sans-serif" }}>
+          <h1 className="text-white text-[2.5rem] sm:text-[3.5rem] lg:text-[4.375rem] font-extrabold leading-[1.0] mb-[0.9375rem] w-full lg:w-[31.375rem]" style={{ fontFamily: "'Lato', sans-serif" }}>
             ALL FROM YOUR WRIST
           </h1>
 
-          <div className="text-white text-[16px] lg:text-[20px] leading-[normal] mb-[38px] lg:w-[551px] whitespace-pre-wrap" style={{ fontFamily: "'Lato', sans-serif" }}>
-            <p className="font-extrabold mb-0">{`The perfect health and fitness companion.`}</p>
-            <p className="font-normal text-[15px] lg:text-[20px]">
+          <div className="text-white text-[1rem] lg:text-[1.25rem] leading-[normal] mb-[2.375rem] w-full lg:w-[34.4375rem] whitespace-pre-wrap" style={{ fontFamily: "'Lato', sans-serif" }}>
+            <p className="font-extrabold mb-2">{`The perfect health and fitness companion.`}</p>
+            <p className="font-normal text-[0.9rem] sm:text-[1rem] lg:text-[1.25rem]">
               Track activity, monitor heart rate, and stay connected with calls, texts, and music — all from your wrist. Featuring essential safety features like Crash Detection and Fall Detection.
             </p>
           </div>
 
-          <div className="flex items-center gap-[18px]">
-            <button className="bg-[#dee4f4] hover:bg-white transition-colors text-[#193495] font-bold text-[14px] lg:text-[16px] w-[140px] lg:w-[155px] h-[48px] rounded-[5px] flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-sm" style={{ fontFamily: "'Lato', sans-serif" }}>
+          <div className="flex items-center gap-[1.125rem]">
+            <button className="bg-[#dee4f4] hover:bg-white transition-colors text-[#193495] font-bold text-[0.875rem] lg:text-[1rem] w-[8.75rem] lg:w-[9.6875rem] h-[3rem] rounded-[0.3125rem] flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-sm" style={{ fontFamily: "'Lato', sans-serif" }}>
               SHOP NOW
             </button>
-            <a href="#details" className="ml-[20px] flex items-center gap-2 text-white text-[14px] lg:text-[16px] font-normal hover:opacity-80 transition-opacity focus:outline-none group" style={{ fontFamily: "'Lato', sans-serif" }}>
+            <a href="#details" className="ml-[1.25rem] flex items-center gap-2 text-white text-[0.875rem] lg:text-[1rem] font-normal hover:opacity-80 transition-opacity focus:outline-none group" style={{ fontFamily: "'Lato', sans-serif" }}>
               View Detail 
-              <img src={imgFrame3} alt="" className="w-[15px] h-[15px] group-hover:translate-x-1 transition-transform" />
+              <img src={imgFrame3} alt="" className="w-[0.9375rem] h-[0.9375rem] group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </div>
-      </div>
 
-      {/* Right Product Image */}
-      <div className="absolute pointer-events-none lg:left-[482px] lg:top-[-269px] w-[500px] lg:w-[1058px] flex items-center justify-center lg:h-[1240px]">
-        <div className="rotate-[10.02deg]">
-          <img alt="Apple Watch SE3" className="w-[879.5px] h-[1104.7px] object-cover mix-blend-normal pointer-events-none" src={img1} />
+        {/* Right Product Image */}
+        <div className="relative mt-[4rem] lg:mt-0 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-[45%] w-full lg:w-[50rem] flex items-center justify-center pointer-events-none">
+          <div className="rotate-[10.02deg] w-full max-w-[18rem] sm:max-w-[22rem] lg:max-w-none">
+            <img alt="Apple Watch SE3" className="w-full lg:w-[54.9688rem] h-auto lg:h-[69.0438rem] object-contain mix-blend-normal" src={img1} />
+          </div>
         </div>
+
       </div>
 
       {/* Color Dots Navigation */}
-      <div className="absolute right-[20px] lg:right-[37px] top-[131px] flex flex-col items-center gap-[10px] z-20">
-        <button aria-label="Black Color" className="w-[30px] h-[30px] rounded-full focus:outline-none hover:scale-110 transition-transform">
+      <div className="absolute right-[1rem] lg:right-[2.3125rem] top-[4rem] lg:top-[8.1875rem] flex flex-col items-center gap-[0.625rem] z-20">
+        <button aria-label="Black Color" className="w-[1.875rem] h-[1.875rem] rounded-full focus:outline-none hover:scale-110 transition-transform">
           <img src={imgEllipse6} alt="" className="w-full h-full object-contain" />
         </button>
-        <button aria-label="Beige Color (Selected)" className="relative w-[30px] h-[30px] rounded-full focus:outline-none group">
-          <img src={imgEllipse9} alt="" className="absolute -left-[3px] -top-[3px] w-[36px] h-[36px] max-w-none group-hover:rotate-45 transition-transform duration-500" />
+        <button aria-label="Beige Color (Selected)" className="relative w-[1.875rem] h-[1.875rem] rounded-full focus:outline-none group">
+          <img src={imgEllipse9} alt="" className="absolute -left-[0.1875rem] -top-[0.1875rem] w-[2.25rem] h-[2.25rem] max-w-none group-hover:rotate-45 transition-transform duration-500" />
           <img src={imgEllipse7} alt="" className="relative w-full h-full object-contain z-10" />
         </button>
       </div>

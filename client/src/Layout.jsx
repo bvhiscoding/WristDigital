@@ -241,11 +241,9 @@ function Footer() {
 
 const Layout = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col w-full bg-[#dee4f4] relative">
+    <div className="min-h-screen flex flex-col w-full bg-white relative">
       <Header />
-      <main className="flex-grow w-full flex justify-center">
-        <div className="w-full max-w-[1440px] relative">{children}</div>
-      </main>
+      <main className="flex-grow w-full flex flex-col">{children}</main>
       <Footer />
     </div>
   );
