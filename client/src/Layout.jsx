@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 // Common images used in the Header
@@ -30,12 +30,26 @@ const imgEllipse17 = "/vnpay-logo.jpg";
 
 function Header() {
   const location = useLocation();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   // On light-background pages (products, accessories, etc.) use white header with dark text
   const isLightPage =
     location.pathname.startsWith("/products") ||
     location.pathname.startsWith("/accessories") ||
     location.pathname.startsWith("/blogs") ||
     location.pathname.startsWith("/sale") ||
+    location.pathname.startsWith("/my-orders") ||
     location.pathname.startsWith("/cart");
 
   return (
@@ -141,13 +155,49 @@ function Header() {
               />
             </Link>
           </div>
-          <button className="h-[55px] w-[55px] flex-shrink-0 rounded-full overflow-hidden">
-            <img
-              alt="Profile Avatar"
-              className="block size-full object-cover"
-              src={imgProperty1Ellipse95}
-            />
-          </button>
+          <div className="relative" ref={dropdownRef}>
+            <button 
+              className="h-[55px] w-[55px] flex-shrink-0 cursor-pointer rounded-full overflow-hidden"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <img
+                alt="Profile Avatar"
+                className="block size-full object-cover"
+                src={imgProperty1Ellipse95}
+              />
+            </button>
+
+            {/* Dropdown Menu */}
+            {isDropdownOpen && (
+              <div className="absolute top-[calc(100%+8px)] right-0 w-[205px] bg-white rounded-[18px] shadow-[0px_1px_8px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col items-center py-3 z-50">
+                <Link to="/profile" className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group">
+                  <img src="/Header/profile.svg" alt="Profile" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">My Profile</span>
+                </Link>
+                <Link to="/my-orders" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group">
+                  <img src="/Header/orders.svg" alt="Orders" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">My Orders</span>
+                </Link>
+                <Link to="/wishlist" className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group">
+                  <img src="/Header/wishlist.svg" alt="Wishlist" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">Wishlist</span>
+                </Link>
+                <div className="w-[85%] h-[1px] bg-gray-200/80 my-2"></div>
+                <Link to="/settings" className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group">
+                  <img src="/Header/setting.svg" alt="Settings" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">Setting</span>
+                </Link>
+                <Link to="/help" className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group">
+                  <img src="/Header/help.svg" alt="Need help?" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">Need help?</span>
+                </Link>
+                <Link to="/signout" className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group mt-2">
+                  <img src="/Header/signout.svg" alt="Sign Out" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">Sign Out</span>
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>
