@@ -53,14 +53,7 @@ function Header() {
     location.pathname.startsWith("/cart");
 
   return (
-    <header
-      className={`fixed top-0 left-0 z-50 w-full flex justify-center h-[100px] transition-colors
-        ${
-          isLightPage
-            ? "bg-white shadow-sm"
-            : "bg-transparent backdrop-blur-[2px]"
-        }`}
-    >
+    <header className="fixed top-0 left-0 z-50 w-full flex justify-center h-[100px] transition-colors bg-transparent backdrop-blur-[2px]">
       <div className="w-full max-w-[1440px] h-full px-12 flex items-center justify-between">
         {/* Logo */}
         <div className="flex-1 flex items-center justify-start">
@@ -79,40 +72,50 @@ function Header() {
         >
           <Link
             to="/"
-            className="font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity"
+            className={`transition-opacity hover:opacity-70 ${
+              location.pathname === "/"
+                ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
+                : "font-['Lato:SemiBold',sans-serif]"
+            }`}
           >
             HOME
           </Link>
           <Link
             to="/products"
-            className={`font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity ${
-              location.pathname === "/products"
-                ? "underline font-extrabold"
-                : ""
+            className={`transition-opacity hover:opacity-70 ${
+              location.pathname.startsWith("/products")
+                ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
+                : "font-['Lato:SemiBold',sans-serif]"
             }`}
           >
             PRODUCTS
           </Link>
           <Link
             to="/accessories"
-            className={`font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity ${
-              location.pathname === "/accessories"
-                ? "underline font-extrabold"
-                : ""
+            className={`transition-opacity hover:opacity-70 ${
+              location.pathname.startsWith("/accessories")
+                ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
+                : "font-['Lato:SemiBold',sans-serif]"
             }`}
           >
             ACCESSORIES
           </Link>
           <Link
             to="/sale"
-            className="font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity"
+            className={`transition-opacity hover:opacity-70 ${
+              location.pathname.startsWith("/sale")
+                ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
+                : "font-['Lato:SemiBold',sans-serif]"
+            }`}
           >
             SALE
           </Link>
           <Link
             to="/blogs"
-            className={`font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity ${
-              location.pathname === "/blogs" ? "underline font-extrabold" : ""
+            className={`transition-opacity hover:opacity-70 ${
+              location.pathname.startsWith("/blogs")
+                ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
+                : "font-['Lato:SemiBold',sans-serif]"
             }`}
           >
             BLOGS
@@ -156,7 +159,7 @@ function Header() {
             </Link>
           </div>
           <div className="relative" ref={dropdownRef}>
-            <button 
+            <button
               className="h-[55px] w-[55px] flex-shrink-0 cursor-pointer rounded-full overflow-hidden"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
@@ -170,30 +173,85 @@ function Header() {
             {/* Dropdown Menu */}
             {isDropdownOpen && (
               <div className="absolute top-[calc(100%+8px)] right-0 w-[205px] bg-white rounded-[18px] shadow-[0px_1px_8px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col items-center py-3 z-50">
-                <Link to="/profile" className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group">
-                  <img src="/Header/profile.svg" alt="Profile" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">My Profile</span>
+                <Link
+                  to="/profile"
+                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                >
+                  <img
+                    src="/Header/profile.svg"
+                    alt="Profile"
+                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                  />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
+                    My Profile
+                  </span>
                 </Link>
-                <Link to="/my-orders" onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group">
-                  <img src="/Header/orders.svg" alt="Orders" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">My Orders</span>
+                <Link
+                  to="/my-orders"
+                  onClick={() => setIsDropdownOpen(false)}
+                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                >
+                  <img
+                    src="/Header/orders.svg"
+                    alt="Orders"
+                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                  />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
+                    My Orders
+                  </span>
                 </Link>
-                <Link to="/wishlist" className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group">
-                  <img src="/Header/wishlist.svg" alt="Wishlist" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">Wishlist</span>
+                <Link
+                  to="/wishlist"
+                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                >
+                  <img
+                    src="/Header/wishlist.svg"
+                    alt="Wishlist"
+                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                  />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
+                    Wishlist
+                  </span>
                 </Link>
                 <div className="w-[85%] h-[1px] bg-gray-200/80 my-2"></div>
-                <Link to="/settings" className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group">
-                  <img src="/Header/setting.svg" alt="Settings" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">Setting</span>
+                <Link
+                  to="/settings"
+                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                >
+                  <img
+                    src="/Header/setting.svg"
+                    alt="Settings"
+                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                  />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
+                    Setting
+                  </span>
                 </Link>
-                <Link to="/help" className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group">
-                  <img src="/Header/help.svg" alt="Need help?" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">Need help?</span>
+                <Link
+                  to="/help"
+                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                >
+                  <img
+                    src="/Header/help.svg"
+                    alt="Need help?"
+                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                  />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
+                    Need help?
+                  </span>
                 </Link>
-                <Link to="/signout" className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group mt-2">
-                  <img src="/Header/signout.svg" alt="Sign Out" className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100" />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">Sign Out</span>
+                <Link
+                  to="/signout"
+                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group mt-2"
+                >
+                  <img
+                    src="/Header/signout.svg"
+                    alt="Sign Out"
+                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                  />
+                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
+                    Sign Out
+                  </span>
                 </Link>
               </div>
             )}
