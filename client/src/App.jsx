@@ -6,6 +6,7 @@ import SalePage from "./pages/SalePage/SalePage.jsx";
 import AccessoriesPage from "./pages/AccessoriesPage/AccessoriesPage.jsx";
 import BlogsPage from "./pages/BlogsPage/BlogsPage.jsx";
 import CartPage from "./pages/CartPage/CartPage.jsx";
+import MyOrdersPage from "./pages/MyOrdersPage/MyOrdersPage.jsx";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/sale" element={<SalePage />} />
           <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/my-orders" element={<MyOrdersPage />} />
         </Routes>
       </Layout>
     </main>
