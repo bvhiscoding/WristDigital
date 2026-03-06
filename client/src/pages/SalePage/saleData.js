@@ -1,6 +1,6 @@
 // Sale page data  — mapped from Figma node 154:146
 // Images from the ProductsPage public folder are reused where possible.
-// Figma-served assets (localhost:3845) are used for sale-specific images.
+// Local assets (client/public/sale) are used for sale-specific images.
 
 const garminLogo = "/ProductsPage/cf0315d0e3131e2d48e87f23d1962fc45f73dead.png";
 const samsungLogo =
@@ -8,26 +8,20 @@ const samsungLogo =
 const xiaomiLogo = "/ProductsPage/1dd51d0b47ff7d84f4f9b794b67433f0c3046516.png";
 
 // Hero banner background (Figma Rectangle242)
-export const heroBg =
-  "http://localhost:3845/assets/76fbcea9edc0edbbdf05cdd4ea08c33de5a8fc8d.png";
+export const heroBg = "/sale/hero-bg.png";
 
 // Flash Sale section: large left image (Figma Rectangle243)
-export const flashSaleMainImg =
-  "http://localhost:3845/assets/5606841c06d07e1b6fd16403d0e3a3a3801c4486.png";
+export const flashSaleMainImg = "/sale/flash-main.png";
 
 // Flash Sale section: two small thumbnails (Figma Rectangle244, 245)
-export const flashThumb1 =
-  "http://localhost:3845/assets/ba1bbb0e89f7cc3949d1506fce26265008105b91.png";
-export const flashThumb2 =
-  "http://localhost:3845/assets/08b9c4301a1133e2a29122fc0ce2d268693f4352.png";
+export const flashThumb1 = "/sale/flash-thumb1.png";
+export const flashThumb2 = "/sale/flash-thumb2.png";
 
 // Apple logo shown beside the Watch Series 7 brand icon (Figma Rectangle)
-export const appleThumbLogo =
-  "http://localhost:3845/assets/dd76937ca11dcdf238d0009f08cf3ee04603f3de.png";
+export const appleThumbLogo = "/sale/apple-logo.png";
 
 // Featured product image for flash sale (Figma Rectangle51)
-export const watchSeries7Img =
-  "http://localhost:3845/assets/6da8df4cac0dcfb2cd18c9428a470f4c90bb31bf.png";
+export const watchSeries7Img = "/sale/watch-series7.png";
 
 // ─── Best Deals products ────────────────────────────────────
 // These map 1:1 to the six cards shown in BEST DEALS grid (Figma Groups 1-6)
@@ -47,8 +41,7 @@ export const bestDeals = [
     salePrice: "1.390.000đ",
     originalPrice: "2.190.000đ",
     remain: 10,
-    image:
-      "http://localhost:3845/assets/b01591ab659200074c907cfbff374bb40b26efa5.png",
+    image: "/sale/bd-2.png",
     brandLogo: garminLogo,
   },
   {
@@ -57,8 +50,7 @@ export const bestDeals = [
     salePrice: "3.290.000đ",
     originalPrice: "4.190.000đ",
     remain: 10,
-    image:
-      "http://localhost:3845/assets/bd64eb991d4e66fbdab75bf99f794fbf2071c694.png",
+    image: "/sale/bd-3.png",
     brandLogo: samsungLogo,
   },
   {
@@ -67,8 +59,7 @@ export const bestDeals = [
     salePrice: "7.390.000đ",
     originalPrice: "8.190.000đ",
     remain: 10,
-    image:
-      "http://localhost:3845/assets/1959e0b3a9a6d66ea46e34859cacae79917e7f45.png",
+    image: "/sale/bd-4.png",
     brandLogo: garminLogo,
   },
   {
@@ -77,8 +68,7 @@ export const bestDeals = [
     salePrice: "1.990.000đ",
     originalPrice: "2.190.000đ",
     remain: 15,
-    image:
-      "http://localhost:3845/assets/04bb20c5db2e7c2e2b24cb52822048a4c5352809.png",
+    image: "/sale/bd-5.png",
     brandLogo: xiaomiLogo,
   },
   {
@@ -87,8 +77,7 @@ export const bestDeals = [
     salePrice: "990.000đ",
     originalPrice: "1.190.000đ",
     remain: 10,
-    image:
-      "http://localhost:3845/assets/6da8df4cac0dcfb2cd18c9428a470f4c90bb31bf.png",
+    image: "/sale/watch-series7.png",
     brandLogo: xiaomiLogo,
   },
 ];

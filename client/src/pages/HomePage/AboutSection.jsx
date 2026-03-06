@@ -6,8 +6,6 @@ const imgRectangle11 = "/HomePage/AboutSection/left-model.png";
 const imgRectangle21 = "/HomePage/AboutSection/apple-logo.png";
 const imgRectangle24 = "/HomePage/AboutSection/huawei-logo.png";
 const imgRectangle26 = "/HomePage/AboutSection/xiaomi-logo.png";
-const imgLine2 =
-  "http://localhost:3845/assets/223c1cccf3a2e641bf546bc963646f39feec2b0e.svg";
 const imgGroup5 = "/HomePage/AboutSection/about-logo.svg";
 
 const AboutSection = () => {

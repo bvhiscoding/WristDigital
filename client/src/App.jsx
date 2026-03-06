@@ -3,6 +3,9 @@ import Layout from "./Layout.jsx";
 import Home from "./pages/HomePage/Home.jsx";
 import ProductsPage from "./pages/ProductsPage/ProductsPage.jsx";
 import SalePage from "./pages/SalePage/SalePage.jsx";
+import AccessoriesPage from "./pages/AccessoriesPage/AccessoriesPage.jsx";
+import BlogsPage from "./pages/BlogsPage/BlogsPage.jsx";
+import CartPage from "./pages/CartPage/CartPage.jsx";
 
 export default function App() {
   return (
@@ -15,7 +18,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/accessories" element={<AccessoriesPage />} />
           <Route path="/sale" element={<SalePage />} />
+          <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </Layout>
     </main>

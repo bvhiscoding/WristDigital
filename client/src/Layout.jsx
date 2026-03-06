@@ -15,10 +15,6 @@ const imgFrame22 = (
   </svg>
 );
 
-const imgLine1 =
-  "http://localhost:3845/assets/0752ba5c56dbf0ee0e9d870bc14d90e126b9b455.svg";
-const imgFrame23 =
-  "http://localhost:3845/assets/9e7a798b99eb04a2266b2881b3c799ec205d3686.svg";
 const imgGroup2 = "/blue-logo.png";
 
 // Common images used in the Footer
@@ -34,15 +30,21 @@ const imgEllipse17 = "/vnpay-logo.jpg";
 
 function Header() {
   const location = useLocation();
-  // On light-background pages (products, etc.) use white header with dark text
-  const isLightPage = location.pathname.startsWith('/products');
+  // On light-background pages (products, accessories, etc.) use white header with dark text
+  const isLightPage =
+    location.pathname.startsWith("/products") ||
+    location.pathname.startsWith("/accessories") ||
+    location.pathname.startsWith("/blogs") ||
+    location.pathname.startsWith("/sale") ||
+    location.pathname.startsWith("/cart");
 
   return (
     <header
       className={`fixed top-0 left-0 z-50 w-full flex justify-center h-[100px] transition-colors
-        ${isLightPage
-          ? 'bg-white shadow-sm'
-          : 'bg-transparent backdrop-blur-[2px]'
+        ${
+          isLightPage
+            ? "bg-white shadow-sm"
+            : "bg-transparent backdrop-blur-[2px]"
         }`}
     >
       <div className="w-full max-w-[1440px] h-full px-12 flex items-center justify-between">
@@ -51,44 +53,68 @@ function Header() {
           <img
             alt="WristDigital Logo"
             className="w-[61px] h-[41px]"
-            src={isLightPage ? '/blue-logo.png' : '/white-logo.png'}
+            src={isLightPage ? "/blue-logo.png" : "/white-logo.png"}
           />
         </div>
 
         {/* Nav links */}
-        <nav className={`flex items-center justify-center gap-10 text-[20px] font-['Lato:SemiBold',sans-serif] ${
-          isLightPage ? 'text-[#193495]' : 'text-white'
-        }`}>
-          <Link to="/" className="font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity">
+        <nav
+          className={`flex items-center justify-center gap-10 text-[20px] font-['Lato:SemiBold',sans-serif] ${
+            isLightPage ? "text-[#193495]" : "text-white"
+          }`}
+        >
+          <Link
+            to="/"
+            className="font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity"
+          >
             HOME
           </Link>
           <Link
             to="/products"
             className={`font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity ${
-              location.pathname === '/products' ? 'underline font-extrabold' : ''
+              location.pathname === "/products"
+                ? "underline font-extrabold"
+                : ""
             }`}
           >
             PRODUCTS
           </Link>
-          <Link to="/accessories" className="font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity">
+          <Link
+            to="/accessories"
+            className={`font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity ${
+              location.pathname === "/accessories"
+                ? "underline font-extrabold"
+                : ""
+            }`}
+          >
             ACCESSORIES
           </Link>
-          <Link to="/sale" className="font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity">
+          <Link
+            to="/sale"
+            className="font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity"
+          >
             SALE
           </Link>
-          <Link to="/blogs" className="font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity">
+          <Link
+            to="/blogs"
+            className={`font-['Lato:SemiBold',sans-serif] hover:opacity-70 transition-opacity ${
+              location.pathname === "/blogs" ? "underline font-extrabold" : ""
+            }`}
+          >
             BLOGS
           </Link>
         </nav>
 
         {/* Search & Profile */}
         <div className="flex-1 flex items-center justify-end gap-6">
-          <div className={`flex items-center border border-solid h-[43px] rounded-[100px] px-4 w-[228px] bg-transparent ${
-            isLightPage ? 'border-[#193495]' : 'border-white'
-          }`}>
+          <div
+            className={`flex items-center border border-solid h-[43px] rounded-[100px] px-4 w-[228px] bg-transparent ${
+              isLightPage ? "border-[#193495]" : "border-white"
+            }`}
+          >
             <img
               alt="Search Icon"
-              className={`w-[20px] h-[20px] ${isLightPage ? '' : 'brightness-0 invert'}`}
+              className={`w-[20px] h-[20px] ${isLightPage ? "" : "brightness-0 invert"}`}
               src="/HomePage/HeroSection/search-icon.svg"
             />
             <input
@@ -96,16 +122,24 @@ function Header() {
               placeholder="Search..."
               className={`ml-2 w-full outline-none text-[15px] font-['Lato:Regular',sans-serif] bg-transparent ${
                 isLightPage
-                  ? 'text-[#193495] placeholder-[#193495]/60'
-                  : 'text-white placeholder-white'
+                  ? "text-[#193495] placeholder-[#193495]/60"
+                  : "text-white placeholder-white"
               }`}
             />
-            <div className={`w-[1px] h-[20px] mx-2 ${isLightPage ? 'bg-[#193495]/30' : 'bg-white'}`}></div>
-            <img
-              alt="Cart"
-              className={`w-[20px] h-[20px] cursor-pointer ${isLightPage ? '' : 'brightness-0 invert'}`}
-              src="/HomePage/HeroSection/shopping-cart.svg"
-            />
+            <div
+              className={`w-[1px] h-[20px] mx-2 ${isLightPage ? "bg-[#193495]/30" : "bg-white"}`}
+            ></div>
+            <Link
+              to="/cart"
+              aria-label="Go to shopping cart"
+              className={`w-[20px] h-[20px] cursor-pointer ${isLightPage ? "" : "brightness-0 invert"}`}
+            >
+              <img
+                alt="Cart"
+                className="w-full h-full"
+                src="/HomePage/HeroSection/shopping-cart.svg"
+              />
+            </Link>
           </div>
           <button className="h-[55px] w-[55px] flex-shrink-0 rounded-full overflow-hidden">
             <img
