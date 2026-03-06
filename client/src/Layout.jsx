@@ -46,22 +46,27 @@ function Header() {
   // On light-background pages (products, accessories, etc.) use white header with dark text
   const isLightPage =
     location.pathname.startsWith("/products") ||
+    location.pathname.startsWith("/product-details") ||
     location.pathname.startsWith("/accessories") ||
     location.pathname.startsWith("/blogs") ||
     location.pathname.startsWith("/sale") ||
     location.pathname.startsWith("/my-orders") ||
     location.pathname.startsWith("/cart");
 
+  const isProductDetails = location.pathname.startsWith("/product-details");
+
   return (
     <header className="fixed top-0 left-0 z-50 w-full flex justify-center h-[100px] transition-colors bg-transparent backdrop-blur-[2px]">
       <div className="w-full max-w-[1440px] h-full px-12 flex items-center justify-between">
         {/* Logo */}
         <div className="flex-1 flex items-center justify-start">
-          <img
-            alt="WristDigital Logo"
-            className="w-[61px] h-[41px]"
-            src={isLightPage ? "/blue-logo.png" : "/white-logo.png"}
-          />
+          <Link to="/">
+            <img
+              alt="WristDigital Logo"
+              className="w-[61px] h-[41px]"
+              src={isLightPage ? "/blue-logo.png" : "/white-logo.png"}
+            />
+          </Link>
         </div>
 
         {/* Nav links */}

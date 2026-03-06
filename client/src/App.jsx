@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import Home from "./pages/HomePage/Home.jsx";
 import ProductsPage from "./pages/ProductsPage/ProductsPage.jsx";
+import ProductDetails from "./pages/ProductDetails.jsx";
 import SalePage from "./pages/SalePage/SalePage.jsx";
 import AccessoriesPage from "./pages/AccessoriesPage/AccessoriesPage.jsx";
 import BlogsPage from "./pages/BlogsPage/BlogsPage.jsx";
@@ -19,6 +20,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/product-details" element={<ProductDetails />} />
           <Route path="/accessories" element={<AccessoriesPage />} />
           <Route path="/sale" element={<SalePage />} />
           <Route path="/blogs" element={<BlogsPage />} />

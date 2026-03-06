@@ -18,15 +18,15 @@ const AccessoriesSection = () => {
         {/* Accessories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full">
           {/* Card 1: Watch Straps */}
-          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] group cursor-pointer transition-shadow hover:shadow-xl overflow-hidden flex flex-col">
+          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] hover:bg-[#193495] group cursor-pointer transition-all duration-300 hover:shadow-xl overflow-hidden flex flex-col">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="font-extrabold text-[4.5rem] lg:text-[6rem] text-[#193495] opacity-[0.04] leading-none text-center">
+              <span className="font-extrabold text-[4.5rem] lg:text-[6rem] text-[#193495] group-hover:text-white transition-all duration-300 opacity-[0.04] group-hover:opacity-[0.08] leading-none text-center">
                 WATCH
                 <br />
                 STRAPS
               </span>
             </div>
-            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] text-[1.5rem] lg:text-[1.75rem] leading-tight z-10 text-left">
+            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] group-hover:text-white transition-colors duration-300 text-[1.5rem] lg:text-[1.75rem] leading-tight z-10 text-left">
               Watch
               <br />
               Straps
@@ -41,15 +41,15 @@ const AccessoriesSection = () => {
           </div>
 
           {/* Card 2: Charging Dock */}
-          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] group cursor-pointer transition-shadow hover:shadow-xl overflow-hidden flex flex-col">
+          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] hover:bg-[#193495] group cursor-pointer transition-all duration-300 hover:shadow-xl overflow-hidden flex flex-col">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="font-extrabold text-[4.5rem] lg:text-[5.5rem] text-[#193495] opacity-[0.04] leading-none text-center">
+              <span className="font-extrabold text-[4.5rem] lg:text-[5.5rem] text-[#193495] group-hover:text-white transition-all duration-300 opacity-[0.04] group-hover:opacity-[0.08] leading-none text-center">
                 CHARGING
                 <br />
                 DOCK
               </span>
             </div>
-            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] text-[1.5rem] lg:text-[1.75rem] leading-tight z-10 text-left">
+            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] group-hover:text-white transition-colors duration-300 text-[1.5rem] lg:text-[1.75rem] leading-tight z-10 text-left">
               Charging
               <br />
               Dock
@@ -64,15 +64,15 @@ const AccessoriesSection = () => {
           </div>
 
           {/* Card 3: Screen Guard */}
-          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] group cursor-pointer transition-shadow hover:shadow-xl overflow-hidden flex flex-col">
+          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] hover:bg-[#193495] group cursor-pointer transition-all duration-300 hover:shadow-xl overflow-hidden flex flex-col">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="font-extrabold text-[4.5rem] lg:text-[6rem] text-[#193495] opacity-[0.04] leading-none text-center">
+              <span className="font-extrabold text-[4.5rem] lg:text-[6rem] text-[#193495] group-hover:text-white transition-all duration-300 opacity-[0.04] group-hover:opacity-[0.08] leading-none text-center">
                 SCREEN
                 <br />
                 GUARD
               </span>
             </div>
-            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] text-[1.5rem] lg:text-[1.75rem] leading-tight z-10 text-left">
+            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] group-hover:text-white transition-colors duration-300 text-[1.5rem] lg:text-[1.75rem] leading-tight z-10 text-left">
               Screen
               <br />
               Guard
@@ -87,15 +87,15 @@ const AccessoriesSection = () => {
           </div>
 
           {/* Card 4: Storage Pouch */}
-          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] group cursor-pointer transition-shadow hover:shadow-xl overflow-hidden flex flex-col">
+          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] hover:bg-[#193495] group cursor-pointer transition-all duration-300 hover:shadow-xl overflow-hidden flex flex-col">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="font-extrabold text-[4.5rem] lg:text-[5.5rem] text-[#193495] opacity-[0.04] leading-none text-center">
+              <span className="font-extrabold text-[4.5rem] lg:text-[5.5rem] text-[#193495] group-hover:text-white transition-all duration-300 opacity-[0.04] group-hover:opacity-[0.08] leading-none text-center">
                 STORAGE
                 <br />
                 POUCH
               </span>
             </div>
-            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] text-[1.5rem] lg:text-[1.75rem] leading-tight text-left z-10 w-[8rem]">
+            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] group-hover:text-white transition-colors duration-300 text-[1.5rem] lg:text-[1.75rem] leading-tight text-left z-10 w-[8rem]">
               Storage
               <br />
               Pouch
@@ -110,15 +110,15 @@ const AccessoriesSection = () => {
           </div>
 
           {/* Card 5: Accessory Bundle */}
-          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] group cursor-pointer transition-shadow hover:shadow-xl overflow-hidden flex flex-col">
+          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] hover:bg-[#193495] group cursor-pointer transition-all duration-300 hover:shadow-xl overflow-hidden flex flex-col">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="font-extrabold text-[4rem] lg:text-[5rem] text-[#193495] opacity-[0.04] leading-none text-center">
+              <span className="font-extrabold text-[4rem] lg:text-[5rem] text-[#193495] group-hover:text-white transition-all duration-300 opacity-[0.04] group-hover:opacity-[0.08] leading-none text-center">
                 ACCESSORY
                 <br />
                 BUNDLE
               </span>
             </div>
-            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] text-[1.5rem] lg:text-[1.75rem] leading-tight z-10 text-left">
+            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] group-hover:text-white transition-colors duration-300 text-[1.5rem] lg:text-[1.75rem] leading-tight z-10 text-left">
               Accessory
               <br />
               Bundle
@@ -133,15 +133,15 @@ const AccessoriesSection = () => {
           </div>
 
           {/* Card 6: Replacement Cable */}
-          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] group cursor-pointer transition-shadow hover:shadow-xl overflow-hidden flex flex-col">
+          <div className="relative h-[18rem] lg:h-[20rem] w-full rounded-[1rem] bg-[#e6eeff] hover:bg-[#193495] group cursor-pointer transition-all duration-300 hover:shadow-xl overflow-hidden flex flex-col">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="font-extrabold text-[3.5rem] lg:text-[4.5rem] text-[#193495] opacity-[0.04] leading-none text-center">
+              <span className="font-extrabold text-[3.5rem] lg:text-[4.5rem] text-[#193495] group-hover:text-white transition-all duration-300 opacity-[0.04] group-hover:opacity-[0.08] leading-none text-center">
                 REPLACEMENT
                 <br />
                 CABLE
               </span>
             </div>
-            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] text-[1.5rem] lg:text-[1.75rem] leading-tight text-left z-10 w-[10rem] lg:w-[13rem]">
+            <p className="absolute left-6 lg:left-8 top-6 lg:top-8 font-bold text-[#14266e] group-hover:text-white transition-colors duration-300 text-[1.5rem] lg:text-[1.75rem] leading-tight text-left z-10 w-[10rem] lg:w-[13rem]">
               Replacement
               <br />
               Cable
