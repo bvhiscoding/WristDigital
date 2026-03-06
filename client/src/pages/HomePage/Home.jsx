@@ -1,10 +1,10 @@
 import React from "react";
-import HeroSection from "./HeroSection";
-import AboutSection from "./AboutSection";
-import BestSellerSection from "./BestSellerSection";
-import SaleSection from "./SaleSection";
-import AccessoriesSection from "./AccessoriesSection";
-import BlogSection from "./BlogSection";
+import HeroSection from "./HeroSection.jsx";
+import AboutSection from "./AboutSection.jsx";
+import BestSellerSection from "./BestSellerSection.jsx";
+import SaleSection from "./SaleSection.jsx";
+import AccessoriesSection from "./AccessoriesSection.jsx";
+import BlogSection from "./BlogSection.jsx";
 
 export default function Home() {
   return (

@@ -2,8 +2,18 @@ import React from "react";
 
 // Common images used in the Header
 const imgProperty1Ellipse95 = "/user-avatar.png";
-const imgFrame22 =
-  "http://localhost:3845/assets/1293779946caee83c854872dc7077539fc51d92d.svg";
+const imgFrame22 = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    fill="#000000"
+    viewBox="0 0 256 256"
+  >
+    <path d="M230.14,58.87A8,8,0,0,0,224,56H62.68L56.6,22.57A8,8,0,0,0,48.73,16H24a8,8,0,0,0,0,16h18L67.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,160,204a28,28,0,1,0,28-28H91.17a8,8,0,0,1-7.87-6.57L80.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,230.14,58.87ZM104,204a12,12,0,1,1-12-12A12,12,0,0,1,104,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,200,204Zm4-74.57A8,8,0,0,1,196.1,136H77.22L65.59,72H214.41Z"></path>
+  </svg>
+);
+
 const imgLine1 =
   "http://localhost:3845/assets/0752ba5c56dbf0ee0e9d870bc14d90e126b9b455.svg";
 const imgFrame23 =
@@ -12,45 +22,34 @@ const imgGroup2 = "/blue-logo.png";
 
 // Common images used in the Footer
 const imgGroup385 = "/white-logo.png";
-const imgEllipse10 =
-  "http://localhost:3845/assets/491709648140f0901cc6350494113a4e79e955f3.png";
-const imgEllipse14 =
-  "http://localhost:3845/assets/f98d48555f473d626275376c6595aa29c47c3afc.png";
-const imgEllipse11 =
-  "http://localhost:3845/assets/68525c27a4d021dfd17f683c877c4ffd15914314.png";
-const imgEllipse15 =
-  "http://localhost:3845/assets/4de3a92107a765be2ac232e2b0bbda7722ba3136.png";
-const imgEllipse12 =
-  "http://localhost:3845/assets/2b7d7c17ac69f544deee81552b5ab3a3673dd86e.png";
-const imgEllipse16 =
-  "http://localhost:3845/assets/f2b51e17ec8d9ecd0987b07ebd55a4b6a913d500.png";
-const imgEllipse13 =
-  "http://localhost:3845/assets/6227ced6e11f4b7f2d2a5bf83c39d326ac077d77.png";
-const imgEllipse17 =
-  "http://localhost:3845/assets/4763be184480053c855b8a64e92cff33291bfd9c.png";
+const imgEllipse10 = "/momo-logo.png";
+const imgEllipse14 = "/facebook.png";
+const imgEllipse11 = "/visa-logo.png";
+const imgEllipse15 = "/instagram.png";
+const imgEllipse12 = "/napas-logo.png";
+const imgEllipse16 = "/email-logo.png";
+const imgEllipse13 = "/zalo-pay.png";
+const imgEllipse17 = "/vnpay-logo.jpg";
 
 function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full flex justify-center bg-white shadow-sm h-[100px]">
+    <header className="fixed top-0 left-0 z-50 w-full flex justify-center bg-transparent h-[100px] backdrop-blur-[2px]">
       <div className="w-full max-w-[1440px] h-full px-12 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex-shrink-0">
+        <div className="flex-1 flex items-center justify-start">
           <img
             alt="WristDigital Logo"
             className="w-[61px] h-[41px]"
-            src={imgGroup2}
+            src="/white-logo.png"
           />
         </div>
 
         {/* Nav links */}
-        <nav className="flex items-center gap-10 text-[#193495] text-[20px] font-['Lato:SemiBold',sans-serif]">
+        <nav className="flex items-center justify-center gap-10 text-white text-[20px] font-['Lato:SemiBold',sans-serif]">
           <a href="#" className="font-['Lato:SemiBold',sans-serif]">
             HOME
           </a>
-          <a
-            href="#"
-            className="font-['Lato:ExtraBold',sans-serif] underline decoration-solid"
-          >
+          <a href="#" className="font-['Lato:SemiBold',sans-serif]">
             PRODUCTS
           </a>
           <a href="#" className="font-['Lato:SemiBold',sans-serif]">
@@ -65,23 +64,23 @@ function Header() {
         </nav>
 
         {/* Search & Profile */}
-        <div className="flex items-center gap-6">
-          <div className="flex items-center border border-[#193495] border-solid h-[43px] rounded-[100px] px-4 w-[228px] bg-white">
+        <div className="flex-1 flex items-center justify-end gap-6">
+          <div className="flex items-center border border-white border-solid h-[43px] rounded-[100px] px-4 w-[228px] bg-transparent">
             <img
               alt="Search Icon"
-              className="w-[20px] h-[20px]"
-              src={imgFrame23}
+              className="w-[20px] h-[20px] brightness-0 invert"
+              src="/HomePage/HeroSection/search-icon.svg"
             />
             <input
               type="text"
               placeholder="Search..."
-              className="ml-2 w-full outline-none text-[15px] font-['Lato:Regular',sans-serif] text-[rgba(25,52,149,0.86)] bg-transparent"
+              className="ml-2 w-full outline-none text-[15px] font-['Lato:Regular',sans-serif] text-white bg-transparent placeholder-white"
             />
-            <div className="w-[1px] h-[20px] bg-gray-300 mx-2"></div>
+            <div className="w-[1px] h-[20px] bg-white mx-2"></div>
             <img
               alt="Filter Icon"
-              className="w-[20px] h-[20px] cursor-pointer"
-              src={imgFrame22}
+              className="w-[20px] h-[20px] cursor-pointer brightness-0 invert"
+              src="/HomePage/HeroSection/shopping-cart.svg"
             />
           </div>
           <button className="h-[55px] w-[55px] flex-shrink-0 rounded-full overflow-hidden">
