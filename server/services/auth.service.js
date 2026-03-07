@@ -58,7 +58,6 @@ const forgotPassword = async (email) => {
 
   return {
     message: "Password reset token sent to your email",
-    token,
   };
 };
 

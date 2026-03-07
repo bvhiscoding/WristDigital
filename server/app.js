@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
+const { sanitizeXSS, sanitizeMongo } = require("./utils/sanitize.js");
 const rateLimit = require("express-rate-limit");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./config/swagger");
@@ -10,33 +10,22 @@ const { notFound } = require("./utils/notFound.js");
 const { errorHandler } = require("./utils/errorHandler.js");
 const app = express();
 
-// XSS sanitizer compatible with Express 5 (fixes xss-clean incompatibility)
-function escapeHtml(str) {
-  if (typeof str !== "string") return str;
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#x27;");
-}
-function sanitizeDeep(val) {
-  if (typeof val === "string") return escapeHtml(val);
-  if (Array.isArray(val)) return val.map(sanitizeDeep);
-  if (val && typeof val === "object") {
-    const out = {};
-    for (const k of Object.keys(val)) out[k] = sanitizeDeep(val[k]);
-    return out;
-  }
-  return val;
-}
-
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
-app.use(mongoSanitize());
+
+// Express 5 compatible sanitization
 app.use((req, _res, next) => {
-  if (req.body) req.body = sanitizeDeep(req.body);
+  if (req.body) {
+    req.body = sanitizeMongo(req.body);
+    req.body = sanitizeXSS(req.body);
+  }
+  if (req.query) {
+    req.query = sanitizeMongo(req.query);
+  }
+  if (req.params) {
+    req.params = sanitizeMongo(req.params);
+  }
   next();
 });
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
