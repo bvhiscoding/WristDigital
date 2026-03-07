@@ -1,21 +1,31 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLeftPanel from "../../components/AuthLeftPanel";
+import { useLoginMutation } from "../../features/auth/authApi";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const [login, { isLoading }] = useLoginMutation();
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    setServerError("");
+
+    try {
+      await login({ email, password }).unwrap();
       navigate("/");
-    }, 1500);
+    } catch (err) {
+      const msg =
+        err?.data?.message ||
+        err?.error ||
+        "Login failed. Please check your credentials.";
+      setServerError(msg);
+    }
   };
 
   return (
@@ -33,8 +43,8 @@ const LoginPage = () => {
             </span>
           </h2>
           <p className="text-white/70 text-[16px] leading-[1.75] max-w-[340px] mx-auto">
-            Log in to access your curated collection, track your premium
-            orders in real-time, and get exclusive early access to our luxury
+            Log in to access your curated collection, track your premium orders
+            in real-time, and get exclusive early access to our luxury
             smartwatch drops.
           </p>
         </div>
@@ -75,7 +85,9 @@ const LoginPage = () => {
             ))}
           </div>
           <div>
-            <p className="text-white text-[13px] font-semibold">10,000+ members</p>
+            <p className="text-white text-[13px] font-semibold">
+              10,000+ members
+            </p>
             <p className="text-white/50 text-[12px]">trusted worldwide</p>
           </div>
         </div>
@@ -155,6 +167,31 @@ const LoginPage = () => {
               <div className="flex-1 h-px bg-gray-200"></div>
             </div>
 
+            {/* Server Error Banner */}
+            {serverError && (
+              <div className="mb-5 px-4 py-3 rounded-[10px] bg-red-50 border border-red-200 flex items-start gap-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#ef4444"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="shrink-0 mt-0.5"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <p className="text-[13px] text-red-600 leading-relaxed">
+                  {serverError}
+                </p>
+              </div>
+            )}
+
             {/* Form */}
             <form onSubmit={handleLogin} className="space-y-5">
               {/* Email */}
@@ -186,6 +223,7 @@ const LoginPage = () => {
                     placeholder="you@example.com"
                     className="w-full h-[50px] pl-11 pr-4 rounded-[12px] border border-gray-200 bg-white text-[14px] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#193495] focus:ring-3 focus:ring-[#193495]/10 transition-all"
                     required
+                    disabled={isLoading}
                   />
                 </div>
               </div>
@@ -234,6 +272,7 @@ const LoginPage = () => {
                     placeholder="••••••••"
                     className="w-full h-[50px] pl-11 pr-12 rounded-[12px] border border-gray-200 bg-white text-[14px] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#193495] focus:ring-3 focus:ring-[#193495]/10 transition-all tracking-widest"
                     required
+                    disabled={isLoading}
                   />
                   <button
                     type="button"

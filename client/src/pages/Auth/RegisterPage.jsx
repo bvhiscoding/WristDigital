@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLeftPanel from "../../components/AuthLeftPanel";
+import { useRegisterMutation } from "../../features/auth/authApi";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -11,24 +12,41 @@ const RegisterPage = () => {
     confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
   const navigate = useNavigate();
+
+  const [register, { isLoading }] = useRegisterMutation();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    setServerError("");
+
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      setServerError("Passwords do not match.");
       return;
     }
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate("/");
-    }, 1500);
+
+    try {
+      // Backend expects fullName (combined first + last)
+      const fullName =
+        `${formData.firstName.trim()} ${formData.lastName.trim()}`.trim();
+      await register({
+        fullName,
+        email: formData.email,
+        password: formData.password,
+      }).unwrap();
+      navigate("/login");
+    } catch (err) {
+      const msg =
+        err?.data?.message ||
+        err?.error ||
+        "Registration failed. Please try again.";
+      setServerError(msg);
+    }
   };
 
   return (
@@ -179,6 +197,31 @@ const RegisterPage = () => {
               <div className="flex-1 h-px bg-gray-200"></div>
             </div>
 
+            {/* Server Error Banner */}
+            {serverError && (
+              <div className="mb-4 px-4 py-3 rounded-[10px] bg-red-50 border border-red-200 flex items-start gap-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#ef4444"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="shrink-0 mt-0.5"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <p className="text-[13px] text-red-600 leading-relaxed">
+                  {serverError}
+                </p>
+              </div>
+            )}
+
             {/* Form */}
             <form onSubmit={handleRegister} className="space-y-4">
               {/* Name row */}
@@ -195,6 +238,7 @@ const RegisterPage = () => {
                     placeholder="John"
                     className="w-full h-[48px] px-4 rounded-[12px] border border-gray-200 bg-white text-[14px] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#193495] focus:ring-3 focus:ring-[#193495]/10 transition-all"
                     required
+                    disabled={isLoading}
                   />
                 </div>
                 <div>
@@ -209,6 +253,7 @@ const RegisterPage = () => {
                     placeholder="Doe"
                     className="w-full h-[48px] px-4 rounded-[12px] border border-gray-200 bg-white text-[14px] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#193495] focus:ring-3 focus:ring-[#193495]/10 transition-all"
                     required
+                    disabled={isLoading}
                   />
                 </div>
               </div>
@@ -243,6 +288,7 @@ const RegisterPage = () => {
                     placeholder="you@example.com"
                     className="w-full h-[48px] pl-11 pr-4 rounded-[12px] border border-gray-200 bg-white text-[14px] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#193495] focus:ring-3 focus:ring-[#193495]/10 transition-all"
                     required
+                    disabled={isLoading}
                   />
                 </div>
               </div>
@@ -285,6 +331,7 @@ const RegisterPage = () => {
                     className="w-full h-[48px] pl-11 pr-12 rounded-[12px] border border-gray-200 bg-white text-[14px] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#193495] focus:ring-3 focus:ring-[#193495]/10 transition-all"
                     required
                     minLength={8}
+                    disabled={isLoading}
                   />
                   <button
                     type="button"
@@ -339,6 +386,7 @@ const RegisterPage = () => {
                   placeholder="Repeat your password"
                   className="w-full h-[48px] px-4 rounded-[12px] border border-gray-200 bg-white text-[14px] text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#193495] focus:ring-3 focus:ring-[#193495]/10 transition-all"
                   required
+                  disabled={isLoading}
                 />
               </div>
 

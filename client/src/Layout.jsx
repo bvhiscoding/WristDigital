@@ -1,23 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectIsAuthenticated,
+  selectCurrentUser,
+  logout,
+} from "./features/auth/authSlice";
 
-// Common images used in the Header
-const imgProperty1Ellipse95 = "/user-avatar.png";
-const imgFrame22 = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="32"
-    height="32"
-    fill="#000000"
-    viewBox="0 0 256 256"
-  >
-    <path d="M230.14,58.87A8,8,0,0,0,224,56H62.68L56.6,22.57A8,8,0,0,0,48.73,16H24a8,8,0,0,0,0,16h18L67.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,160,204a28,28,0,1,0,28-28H91.17a8,8,0,0,1-7.87-6.57L80.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,230.14,58.87ZM104,204a12,12,0,1,1-12-12A12,12,0,0,1,104,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,200,204Zm4-74.57A8,8,0,0,1,196.1,136H77.22L65.59,72H214.41Z"></path>
-  </svg>
-);
-
+// ── Asset constants ────────────────────────────────────────────────────────────
 const imgGroup2 = "/blue-logo.png";
-
-// Common images used in the Footer
 const imgGroup385 = "/white-logo.png";
 const imgEllipse10 = "/momo-logo.png";
 const imgEllipse14 = "/facebook.png";
@@ -28,11 +19,19 @@ const imgEllipse16 = "/email-logo.png";
 const imgEllipse13 = "/zalo-pay.png";
 const imgEllipse17 = "/vnpay-logo.jpg";
 
+// ── Header ────────────────────────────────────────────────────────────────────
 function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const user = useSelector(selectCurrentUser);
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
+  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -43,7 +42,7 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // On light-background pages (products, accessories, etc.) use white header with dark text
+  // Light vs dark header mode
   const isLightPage =
     location.pathname.startsWith("/products") ||
     location.pathname.startsWith("/product-details") ||
@@ -57,10 +56,30 @@ function Header() {
     location.pathname.startsWith("/help") ||
     location.pathname.startsWith("/settings");
 
-  const isProductDetails = location.pathname.startsWith("/product-details");
+  // Nav link active helper
+  const navLinkClass = (active) =>
+    `transition-opacity hover:opacity-70 ${
+      active
+        ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
+        : "font-['Lato:SemiBold',sans-serif]"
+    }`;
+
+  const handleSignOut = () => {
+    dispatch(logout());
+    setIsDropdownOpen(false);
+    navigate("/login");
+  };
+
+  // Avatar initials fallback (e.g. "Nguyen Van A" → "NV")
+  const getInitials = (name = "") => {
+    const parts = name.trim().split(" ").filter(Boolean);
+    if (parts.length === 0) return "U";
+    if (parts.length === 1) return parts[0][0].toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  };
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full flex justify-center h-[100px] transition-colors bg-transparent backdrop-blur-[2px]">
+    <header className="fixed top-0 left-0 z-50 w-full flex justify-center h-[80px] transition-colors bg-transparent backdrop-blur-[2px]">
       <div className="w-full max-w-[1440px] h-full px-12 flex items-center justify-between">
         {/* Logo */}
         <div className="flex-1 flex items-center justify-start">
@@ -75,66 +94,46 @@ function Header() {
 
         {/* Nav links */}
         <nav
-          className={`flex items-center justify-center gap-10 text-[20px] font-['Lato:SemiBold',sans-serif] ${
+          className={`flex items-center justify-center gap-10 text-[18px] font-['Lato:SemiBold',sans-serif] ${
             isLightPage ? "text-[#193495]" : "text-white"
           }`}
         >
-          <Link
-            to="/"
-            className={`transition-opacity hover:opacity-70 ${
-              location.pathname === "/"
-                ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
-                : "font-['Lato:SemiBold',sans-serif]"
-            }`}
-          >
+          <Link to="/" className={navLinkClass(location.pathname === "/")}>
             HOME
           </Link>
           <Link
             to="/products"
-            className={`transition-opacity hover:opacity-70 ${
-              location.pathname.startsWith("/products")
-                ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
-                : "font-['Lato:SemiBold',sans-serif]"
-            }`}
+            className={navLinkClass(location.pathname.startsWith("/products"))}
           >
             PRODUCTS
           </Link>
           <Link
             to="/accessories"
-            className={`transition-opacity hover:opacity-70 ${
-              location.pathname.startsWith("/accessories")
-                ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
-                : "font-['Lato:SemiBold',sans-serif]"
-            }`}
+            className={navLinkClass(
+              location.pathname.startsWith("/accessories"),
+            )}
           >
             ACCESSORIES
           </Link>
           <Link
             to="/sale"
-            className={`transition-opacity hover:opacity-70 ${
-              location.pathname.startsWith("/sale")
-                ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
-                : "font-['Lato:SemiBold',sans-serif]"
-            }`}
+            className={navLinkClass(location.pathname.startsWith("/sale"))}
           >
             SALE
           </Link>
           <Link
             to="/blogs"
-            className={`transition-opacity hover:opacity-70 ${
-              location.pathname.startsWith("/blogs")
-                ? "font-['Lato:Bold',sans-serif] font-bold underline underline-offset-4"
-                : "font-['Lato:SemiBold',sans-serif]"
-            }`}
+            className={navLinkClass(location.pathname.startsWith("/blogs"))}
           >
             BLOGS
           </Link>
         </nav>
 
-        {/* Search & Profile */}
+        {/* Search + Auth area */}
         <div className="flex-1 flex items-center justify-end gap-6">
+          {/* Search + Cart pill */}
           <div
-            className={`flex items-center border border-solid h-[43px] rounded-[100px] px-4 w-[228px] bg-transparent ${
+            className={`flex items-center border border-solid h-[40px] rounded-[100px] px-4 w-[220px] bg-transparent ${
               isLightPage ? "border-[#193495]" : "border-white"
             }`}
           >
@@ -154,7 +153,7 @@ function Header() {
             />
             <div
               className={`w-[1px] h-[20px] mx-2 ${isLightPage ? "bg-[#193495]/30" : "bg-white"}`}
-            ></div>
+            />
             <Link
               to="/cart"
               aria-label="Go to shopping cart"
@@ -167,115 +166,175 @@ function Header() {
               />
             </Link>
           </div>
-          <div className="relative" ref={dropdownRef}>
-            <button
-              className="h-[55px] w-[55px] flex-shrink-0 cursor-pointer rounded-full overflow-hidden"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <img
-                alt="Profile Avatar"
-                className="block size-full object-cover"
-                src={imgProperty1Ellipse95}
-              />
-            </button>
 
-            {/* Dropdown Menu */}
-            {isDropdownOpen && (
-              <div className="absolute top-[calc(100%+8px)] right-0 w-[205px] bg-white rounded-[18px] shadow-[0px_1px_8px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col items-center py-3 z-50">
-                <Link
-                  to="/profile"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
-                >
+          {/* ──────────── Authenticated: Avatar + Dropdown ──────────── */}
+          {isAuthenticated ? (
+            <div className="relative" ref={dropdownRef}>
+              <button
+                className="h-[44px] w-[44px] flex-shrink-0 cursor-pointer rounded-full overflow-hidden ring-2 ring-white/20 hover:ring-[#193495]/40 transition-all flex items-center justify-center"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                aria-label="Open user menu"
+                aria-expanded={isDropdownOpen}
+              >
+                {user?.avatar ? (
                   <img
-                    src="/Header/profile.svg"
-                    alt="Profile"
-                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                    alt="Profile Avatar"
+                    className="block size-full object-cover"
+                    src={user.avatar}
                   />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
-                    My Profile
-                  </span>
-                </Link>
-                <Link
-                  to="/my-orders"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
-                >
-                  <img
-                    src="/Header/orders.svg"
-                    alt="Orders"
-                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
-                  />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
-                    My Orders
-                  </span>
-                </Link>
-                <Link
-                  to="/wishlist"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
-                >
-                  <img
-                    src="/Header/wishlist.svg"
-                    alt="Wishlist"
-                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
-                  />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
-                    Wishlist
-                  </span>
-                </Link>
-                <div className="w-[85%] h-[1px] bg-gray-200/80 my-2"></div>
-                <Link
-                  to="/settings"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
-                >
-                  <img
-                    src="/Header/setting.svg"
-                    alt="Settings"
-                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
-                  />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
-                    Settings
-                  </span>
-                </Link>
-                <Link
-                  to="/help"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
-                >
-                  <img
-                    src="/Header/help.svg"
-                    alt="Need help?"
-                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
-                  />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
-                    Need help?
-                  </span>
-                </Link>
-                <Link
-                  to="/login"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group mt-2"
-                >
-                  <img
-                    src="/Header/signout.svg"
-                    alt="Sign Out"
-                    className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
-                  />
-                  <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
-                    Sign Out
-                  </span>
-                </Link>
-              </div>
-            )}
-          </div>
+                ) : (
+                  /* Initials fallback */
+                  <div className="size-full bg-gradient-to-br from-[#193495] to-[#0c1950] flex items-center justify-center">
+                    <span className="text-white text-[16px] font-bold select-none">
+                      {getInitials(user?.fullName || user?.name || "")}
+                    </span>
+                  </div>
+                )}
+              </button>
+
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div className="absolute top-[calc(100%+8px)] right-0 w-[205px] bg-white rounded-[18px] shadow-[0px_1px_8px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col items-center py-3 z-50">
+                  {/* User info */}
+                  {user?.fullName && (
+                    <div className="w-[181px] px-3 py-2 mb-1">
+                      <p className="text-[13px] font-bold text-[#0c1950] truncate">
+                        {user.fullName}
+                      </p>
+                      <p className="text-[11px] text-gray-400 truncate">
+                        {user.email}
+                      </p>
+                    </div>
+                  )}
+                  <div className="w-[85%] h-[1px] bg-gray-200/80 mb-2" />
+
+                  <Link
+                    to="/profile"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                  >
+                    <img
+                      src="/Header/profile.svg"
+                      alt=""
+                      className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                    />
+                    <span className="text-[13px] font-medium text-black">
+                      My Profile
+                    </span>
+                  </Link>
+                  <Link
+                    to="/my-orders"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                  >
+                    <img
+                      src="/Header/orders.svg"
+                      alt=""
+                      className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                    />
+                    <span className="text-[13px] font-medium text-black">
+                      My Orders
+                    </span>
+                  </Link>
+                  <Link
+                    to="/wishlist"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                  >
+                    <img
+                      src="/Header/wishlist.svg"
+                      alt=""
+                      className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                    />
+                    <span className="text-[13px] font-medium text-black">
+                      Wishlist
+                    </span>
+                  </Link>
+
+                  <div className="w-[85%] h-[1px] bg-gray-200/80 my-2" />
+
+                  <Link
+                    to="/settings"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                  >
+                    <img
+                      src="/Header/setting.svg"
+                      alt=""
+                      className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                    />
+                    <span className="text-[13px] font-medium text-black">
+                      Settings
+                    </span>
+                  </Link>
+                  <Link
+                    to="/help"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                  >
+                    <img
+                      src="/Header/help.svg"
+                      alt=""
+                      className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                    />
+                    <span className="text-[13px] font-medium text-black">
+                      Need help?
+                    </span>
+                  </Link>
+
+                  <div className="w-[85%] h-[1px] bg-gray-200/80 my-2" />
+
+                  <button
+                    onClick={handleSignOut}
+                    className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-red-50 transition-colors my-0.5 group"
+                  >
+                    <img
+                      src="/Header/signout.svg"
+                      alt=""
+                      className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
+                    />
+                    <span className="text-[13px] font-medium text-red-600">
+                      Sign Out
+                    </span>
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* ──────────── Guest: Login Button ──────────── */
+            <Link
+              to="/login"
+              className={`inline-flex items-center gap-1.5 h-[38px] px-6 rounded-full text-[14px] font-semibold border transition-all duration-200 ${
+                isLightPage
+                  ? "border-[#193495] text-[#193495] hover:bg-[#193495] hover:text-white"
+                  : "border-white text-white hover:bg-white hover:text-[#193495]"
+              }`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                <polyline points="10 17 15 12 10 7" />
+                <line x1="15" y1="12" x2="3" y2="12" />
+              </svg>
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </header>
   );
 }
 
+// ── Footer ────────────────────────────────────────────────────────────────────
 function Footer() {
   return (
     <footer className="w-full flex justify-center bg-[#0c1950] py-16 text-white text-[20px] font-['Lato:Regular',sans-serif]">
@@ -330,7 +389,7 @@ function Footer() {
             </li>
             <li>
               <Link to="/help?tab=return-refund" className="hover:underline">
-                Return & Refund Policy
+                Return &amp; Refund Policy
               </Link>
             </li>
             <li>
@@ -418,6 +477,7 @@ function Footer() {
   );
 }
 
+// ── Layout ────────────────────────────────────────────────────────────────────
 const Layout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col w-full bg-white relative">
