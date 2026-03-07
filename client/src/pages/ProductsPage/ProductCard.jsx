@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Star icon
 const StarIcon = () => (
@@ -46,6 +47,7 @@ const HeartIcon = ({ filled }) => (
 );
 
 const ProductCard = ({
+  id,
   name,
   price,
   priceUnit = "đ",
@@ -55,6 +57,9 @@ const ProductCard = ({
   brandLogo,
 }) => {
   const [wishlisted, setWishlisted] = useState(false);
+
+  // Link to details (for demo purposes, linking id=1 or all to product-details)
+  const detailUrl = id === 1 ? "/product-details" : "#";
 
   return (
     <article className="relative bg-white flex flex-col h-full group overflow-hidden rounded-[20px] shadow-sm hover:shadow-md transition-shadow">
@@ -87,20 +92,25 @@ const ProductCard = ({
       )}
 
       {/* Product image */}
-      <div className="w-full aspect-square flex items-center justify-center p-6 overflow-hidden bg-white">
+      <Link
+        to={detailUrl}
+        className="w-full aspect-square flex items-center justify-center p-6 overflow-hidden bg-white group-hover:opacity-90 transition-opacity"
+      >
         <img
           src={image}
           alt={name}
           className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
         />
-      </div>
+      </Link>
 
       {/* Info */}
       <div className="flex flex-col gap-2 px-4 pt-2 pb-4 flex-grow">
         {/* Name */}
-        <h3 className="text-[22px] font-bold text-black text-center font-['Lato'] leading-tight">
-          {name}
-        </h3>
+        <Link to={detailUrl} className="hover:text-[#193495] transition-colors">
+          <h3 className="text-[22px] font-bold text-black text-center font-['Lato'] leading-tight inherit-text-color">
+            {name}
+          </h3>
+        </Link>
 
         {/* Price */}
         <p className="text-[20px] font-semibold text-black text-center font-['Lato']">
