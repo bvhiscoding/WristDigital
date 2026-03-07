@@ -1,28 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import useCountdown from "../../hooks/useCountdown";
 import {
   flashSaleMainImg,
   flashThumb1,
   flashThumb2,
   appleThumbLogo,
 } from "./saleData";
-
-/**
- * FlashSaleSection
- * Figma nodes perfectly implemented (matches reference layout)
- */
-
-// Countdown timer hook
-const useCountdown = (initialSeconds) => {
-  const [seconds, setSeconds] = useState(initialSeconds);
-  useEffect(() => {
-    const id = setInterval(() => setSeconds((s) => (s > 0 ? s - 1 : 0)), 1000);
-    return () => clearInterval(id);
-  }, []);
-  const h = String(Math.floor(seconds / 3600)).padStart(2, "0");
-  const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
-  const s = String(seconds % 60).padStart(2, "0");
-  return `${h}:${m}:${s}`;
-};
 
 // Right-arrow navigation circle placed perfectly at the right edge of the main image
 const ArrowButton = () => (
@@ -37,7 +20,7 @@ const ArrowButton = () => (
 );
 
 const FlashSaleSection = () => {
-  const countdown = useCountdown(1 * 3600 + 50 * 60 + 30); // 01:50:30
+  const countdown = useCountdown(1 * 3600 + 50 * 60 + 30);
 
   return (
     <section

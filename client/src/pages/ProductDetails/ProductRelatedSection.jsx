@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "../ProductsPage/ProductCard";
+import ProductCard from "../../components/ProductCard";
 
 const relatedProducts = [
   {

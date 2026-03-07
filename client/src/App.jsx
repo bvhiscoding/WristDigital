@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import Home from "./pages/HomePage/Home.jsx";
 import ProductsPage from "./pages/ProductsPage/ProductsPage.jsx";
-import ProductDetails from "./pages/ProductDetails.jsx";
+import ProductDetails from "./pages/ProductDetails/ProductDetails.jsx";
 import SalePage from "./pages/SalePage/SalePage.jsx";
 import AccessoriesPage from "./pages/AccessoriesPage/AccessoriesPage.jsx";
 import BlogsPage from "./pages/BlogsPage/BlogsPage.jsx";

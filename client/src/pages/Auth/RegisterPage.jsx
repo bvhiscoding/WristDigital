@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AuthLeftPanel from "../../components/AuthLeftPanel";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -33,95 +34,76 @@ const RegisterPage = () => {
   return (
     <div className="flex h-screen w-full overflow-hidden font-['Inter',sans-serif]">
       {/* ───── LEFT PANEL ─────────────────────────────────── */}
-      <div className="hidden md:flex md:w-1/2 relative flex-col bg-gradient-to-br from-[#0c1950] to-[#1a3caf] overflow-hidden">
-        {/* Decorative blobs */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
-        <div className="absolute -bottom-32 -left-20 w-[500px] h-[500px] bg-indigo-900/50 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/5 rounded-full blur-[60px]" />
+      <AuthLeftPanel>
+        <div className="mb-10">
+          <span className="inline-block text-[13px] font-semibold tracking-[0.2em] text-blue-300 uppercase mb-5">
+            Join the Elite
+          </span>
+          <h2 className="text-[42px] font-black text-white leading-[1.15] mb-6">
+            Join The <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-white">
+              Digital Elite.
+            </span>
+          </h2>
 
-        {/* Logo - pinned top left */}
-        <div className="absolute top-10 left-12 z-20">
-          <Link to="/">
-            <img
-              src="/white-logo.png"
-              alt="WristDigital"
-              className="h-10 object-contain hover:opacity-80 transition-opacity"
-            />
+          {/* Feature list */}
+          <ul className="space-y-4 mb-10 text-left">
+            {[
+              "Curated selection of premium smartwatches",
+              "Priority worldwide insured shipping",
+              "Exclusive member-only pre-orders",
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-4">
+                <div className="mt-0.5 w-5 h-5 rounded-full bg-white/15 border border-white/25 flex items-center justify-center shrink-0">
+                  <svg
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <span className="text-white/75 text-[15px] leading-snug">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          {/* CTA Button */}
+          <Link
+            to="/products"
+            className="group inline-flex items-center gap-3 w-fit bg-white/10 hover:bg-white/20 border border-white/20 text-white text-[14px] font-semibold px-6 py-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 8l4 4-4 4"></path>
+              <path d="M8 12h8"></path>
+            </svg>
+            See our products
           </Link>
         </div>
 
-        {/* Center Content */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center items-center text-center px-14">
-          <div className="mb-10">
-            <span className="inline-block text-[13px] font-semibold tracking-[0.2em] text-blue-300 uppercase mb-5">
-              Join the Elite
-            </span>
-            <h2 className="text-[42px] font-black text-white leading-[1.15] mb-6">
-              Join The <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-white">
-                Digital Elite.
-              </span>
-            </h2>
-
-            {/* Feature list */}
-            <ul className="space-y-4 mb-10 text-left">
-              {[
-                "Curated selection of premium smartwatches",
-                "Priority worldwide insured shipping",
-                "Exclusive member-only pre-orders",
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-4">
-                  <div className="mt-0.5 w-5 h-5 rounded-full bg-white/15 border border-white/25 flex items-center justify-center shrink-0">
-                    <svg
-                      width="11"
-                      height="11"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="white"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                  <span className="text-white/75 text-[15px] leading-snug">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            {/* CTA Button */}
-            <Link
-              to="/products"
-              className="group inline-flex items-center gap-3 w-fit bg-white/10 hover:bg-white/20 border border-white/20 text-white text-[14px] font-semibold px-6 py-3 rounded-full transition-all duration-300 backdrop-blur-sm"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M12 8l4 4-4 4"></path>
-                <path d="M8 12h8"></path>
-              </svg>
-              See our products
-            </Link>
-          </div>
-
-          {/* Quote */}
-          <p className="text-white/50 text-[13px] italic mt-10 pt-8 border-t border-white/10 w-full">
-            "WristDigital fundamentally changed how I acquire luxury tech."
-          </p>
-        </div>
-      </div>
+        {/* Quote */}
+        <p className="text-white/50 text-[13px] italic mt-10 pt-8 border-t border-white/10 w-full">
+          "WristDigital fundamentally changed how I acquire luxury tech."
+        </p>
+      </AuthLeftPanel>
 
       {/* ───── RIGHT PANEL ─────────────────────────────────── */}
       <div className="md:w-1/2 bg-[#f9fafb] flex flex-col overflow-y-auto">
