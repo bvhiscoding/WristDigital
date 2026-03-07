@@ -28,14 +28,14 @@ const FeatureBox = ({ features, extra = '' }) => (
 
 const HeroSection = () => {
   const bottomFeatures = [
-    { icon: '/ProductsPage/06e84b61f2f34fd157219e699a940bbae2e3da6f.svg', label: 'HEART RATE' },
-    { icon: '/ProductsPage/6e459ac133f743d1127b6fb1743bc32265b43e79.svg', label: 'WATER PROOF' },
-    { icon: '/ProductsPage/6b6d6f7302d97f8ae75c51ce9231a719d7d30e26.svg', label: 'DIRECT CALLING' },
+    { icon: '/ProductsPage/heart-rate-icon.svg', label: 'HEART RATE' },
+    { icon: '/ProductsPage/water-proof-icon.svg', label: 'WATER PROOF' },
+    { icon: '/ProductsPage/direct-calling-icon.svg', label: 'DIRECT CALLING' },
   ];
   const upperFeatures = [
-    { icon: '/ProductsPage/06e84b61f2f34fd157219e699a940bbae2e3da6f.svg', label: 'HEART RATE' },
-    { icon: '/ProductsPage/5866e61f227faaab2067b972093ac46878227ed1.svg', label: 'BUILT-IN GPS' },
-    { icon: '/ProductsPage/c8569d58f546e4fc596736bb6fab00e184d2c4b9.svg', label: 'e-SIM' },
+    { icon: '/ProductsPage/heart-rate-icon.svg', label: 'HEART RATE' },
+    { icon: '/ProductsPage/built-in-gps-icon.svg', label: 'BUILT-IN GPS' },
+    { icon: '/ProductsPage/e-sim-icon.svg', label: 'e-SIM' },
   ];
 
   return (
@@ -48,22 +48,22 @@ const HeroSection = () => {
 
       {/* Decorative SVG background shape */}
       <img
-        src="/ProductsPage/40d011ffb8e5ff57977ef1e5b857d09289ec8c4a.svg"
+        src="/ProductsPage/hero-bg-shape.svg"
         alt=""
         aria-hidden="true"
         className="absolute top-[100px] left-1/2 -translate-x-1/2 w-[75%] max-w-[1080px] h-auto z-0 mix-blend-multiply opacity-40 pointer-events-none"
       />
 
-      {/* Left model image */}
+      {/* Left model image (man looking away) */}
       <img
-        src="/ProductsPage/dbd051b12e6da7dbf3591b2c013e9905d845ee06.png"
+        src="/ProductsPage/hero-left-model.png"
         alt="Person wearing smartwatch"
         className="absolute bottom-0 left-0 h-[76%] object-contain object-bottom select-none z-10 -scale-x-100"
       />
 
-      {/* Right model image */}
+      {/* Right model image (man facing forward looking at watch) */}
       <img
-        src="/ProductsPage/bcbdbd2a8a967e0374c97004ade1822d037198d3.png"
+        src="/ProductsPage/hero-right-model.png"
         alt="Person looking at smartwatch"
         className="absolute bottom-0 right-0 h-[95%] max-h-[720px] object-contain object-bottom select-none z-10"
       />
@@ -81,7 +81,7 @@ const HeroSection = () => {
         </p>
       </div>
 
-      {/* Feature Boxes — positioned at bottom-center but staggered vertically */}
+      {/* Feature Boxes Container — positioned at bottom-center but staggered vertically to match Figma UI */}
       <div className="relative z-20 flex flex-col items-center gap-0 mt-auto">
         {/* Upper box (shifted right in Figma) */}
         <div className="flex justify-center w-full translate-x-[6%]">

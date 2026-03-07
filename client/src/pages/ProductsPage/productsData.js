@@ -1,10 +1,10 @@
 // Products data — derived from Figma design (node 144:48)
 // Brand logo PNGs — verified from Figma asset inspection
-const appleLogo = "/ProductsPage/d4983d2953d6bdffd4c1c4ddb83d0ca3c1e455ec.png";
-const huaweiLogo = "/ProductsPage/30055a8400e76b78f1aae6824866863ee3349c17.png";
-const garminLogo = "/ProductsPage/cf0315d0e3131e2d48e87f23d1962fc45f73dead.png";
+const appleLogo = "/ProductsPage/apple-logo.png";
+const huaweiLogo = "/ProductsPage/huawei-logo.png";
+const garminLogo = "/ProductsPage/garmin-logo.png";
 const samsungLogo =
-  "/ProductsPage/ad841972e26a2caecd87f6fb8c6f5a558f241ba9.png";
+  "/ProductsPage/samsung-logo.png";
 
 export const allProducts = [
   // Row 1
@@ -14,7 +14,7 @@ export const allProducts = [
     price: "26,500,000",
     rating: "5.0",
     reviews: "200",
-    image: "/ProductsPage/0db496073fd56002f672f5835bcc2a4f646ad085.png",
+    image: "/ProductsPage/apple-watch-ultra-3.png",
     brandLogo: appleLogo,
   },
   {
@@ -23,7 +23,7 @@ export const allProducts = [
     price: "23,190,000",
     rating: "5.0",
     reviews: "100",
-    image: "/ProductsPage/a44d6b09ace000b0fb1a56df1315c8beb48db486.png",
+    image: "/ProductsPage/garmin-fenix-8-43mm.png",
     brandLogo: garminLogo,
   },
   {
@@ -32,7 +32,7 @@ export const allProducts = [
     price: "19,990,000",
     rating: "5.0",
     reviews: "100",
-    image: "/ProductsPage/9534248001a6d8932b1f012dfe09182151287218.png",
+    image: "/ProductsPage/garmin-epix-pro-gen-2.png",
     brandLogo: garminLogo,
   },
   // Row 2
@@ -42,7 +42,7 @@ export const allProducts = [
     price: "19,000,000",
     rating: "5.0",
     reviews: "200",
-    image: "/ProductsPage/f51cef738901ba154eae4736afc4d9e937a53901.png",
+    image: "/ProductsPage/apple-watch-ultra-4.png",
     brandLogo: appleLogo,
   },
   {
@@ -51,7 +51,7 @@ export const allProducts = [
     price: "8,190,000",
     rating: "5.0",
     reviews: "100",
-    image: "/ProductsPage/c9dd5bd5a70d8df7745cd94c56ac0eec31c5412a.png",
+    image: "/ProductsPage/samsung-galaxy-watch-5.png",
     brandLogo: samsungLogo,
   },
   {
@@ -60,7 +60,7 @@ export const allProducts = [
     price: "9,590,000",
     rating: "5.0",
     reviews: "100",
-    image: "/ProductsPage/686fcecf753988b709c60e413c676c33189fa998.png",
+    image: "/ProductsPage/samsung-galaxy-watch-8.png",
     brandLogo: samsungLogo,
   },
   // Row 3
@@ -70,7 +70,7 @@ export const allProducts = [
     price: "5,490,000",
     rating: "5.0",
     reviews: "100",
-    image: "/ProductsPage/e33e7f38b87360f896b8022763ae9726ef85841b.png",
+    image: "/ProductsPage/huawei-gt6.png",
     brandLogo: huaweiLogo,
   },
   {
@@ -79,7 +79,7 @@ export const allProducts = [
     price: "4,500,000",
     rating: "4.9",
     reviews: "90",
-    image: "/ProductsPage/528c0b079d65cc48aa793cd0517123165a07dea8.png",
+    image: "/ProductsPage/huawei-gt4.png",
     brandLogo: huaweiLogo,
   },
   {
@@ -88,7 +88,7 @@ export const allProducts = [
     price: "2,890,000",
     rating: "5.0",
     reviews: "100",
-    image: "/ProductsPage/fd8dad8e69e7d886fc92127fc8adbf097a3bf2af.png",
+    image: "/ProductsPage/huawei-fit4.png",
     brandLogo: huaweiLogo,
   },
 ];

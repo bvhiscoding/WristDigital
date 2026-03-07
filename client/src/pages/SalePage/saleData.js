@@ -2,10 +2,10 @@
 // Images from the ProductsPage public folder are reused where possible.
 // Local assets (client/public/sale) are used for sale-specific images.
 
-const garminLogo = "/ProductsPage/cf0315d0e3131e2d48e87f23d1962fc45f73dead.png";
+const garminLogo = "/ProductsPage/garmin-logo.png";
 const samsungLogo =
-  "/ProductsPage/ad841972e26a2caecd87f6fb8c6f5a558f241ba9.png";
-const xiaomiLogo = "/ProductsPage/1dd51d0b47ff7d84f4f9b794b67433f0c3046516.png";
+  "/ProductsPage/samsung-logo.png";
+const xiaomiLogo = "/ProductsPage/xiaomi-logo.png";
 
 // Hero banner background (Figma Rectangle242)
 export const heroBg = "/sale/hero-bg.png";
@@ -32,7 +32,7 @@ export const bestDeals = [
     salePrice: "19.000.000đ",
     originalPrice: "19.990.000đ",
     remain: 10,
-    image: "/ProductsPage/9534248001a6d8932b1f012dfe09182151287218.png",
+    image: "/ProductsPage/garmin-epix-pro-gen-2.png",
     brandLogo: garminLogo,
   },
   {

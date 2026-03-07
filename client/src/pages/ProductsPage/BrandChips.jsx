@@ -5,37 +5,37 @@ const brands = [
   {
     id: "apple",
     label: "Apple",
-    logo: "/ProductsPage/d4983d2953d6bdffd4c1c4ddb83d0ca3c1e455ec.png",
+    logo: "/ProductsPage/apple-logo.png",
     activeBorder: "#1a2530",
   },
   {
     id: "huawei",
     label: "Huawei",
-    logo: "/ProductsPage/30055a8400e76b78f1aae6824866863ee3349c17.png",
+    logo: "/ProductsPage/huawei-logo.png",
     activeBorder: "#1a2530",
   },
   {
     id: "xiaomi",
     label: "Xiaomi",
-    logo: "/ProductsPage/1dd51d0b47ff7d84f4f9b794b67433f0c3046516.png",
+    logo: "/ProductsPage/xiaomi-logo.png",
     activeBorder: "#000000",
   },
   {
     id: "redmi",
     label: "Redmi",
-    logo: "/ProductsPage/4fdeaf90144217ec95d9b841b9a08bf98b8f8f2d.png",
+    logo: "/ProductsPage/redmi-logo.png",
     activeBorder: "#000000",
   },
   {
     id: "garmin",
     label: "Garmin",
-    logo: "/ProductsPage/cf0315d0e3131e2d48e87f23d1962fc45f73dead.png",
+    logo: "/ProductsPage/garmin-logo.png",
     activeBorder: "#000000",
   },
   {
     id: "samsung",
     label: "Samsung",
-    logo: "/ProductsPage/ad841972e26a2caecd87f6fb8c6f5a558f241ba9.png",
+    logo: "/ProductsPage/samsung-logo.png",
     activeBorder: "#000000",
   },
 ];
@@ -59,6 +59,7 @@ const BrandChips = ({ onBrandChange }) => {
               onClick={() => handleSelect(brand.id)}
               aria-pressed={isActive}
               aria-label={brand.label}
+              // Active vs Inactive state according to UI
               className={`flex items-center justify-center h-[57px] px-5 rounded-[15px] border-2 transition-all focus:outline-none focus:ring-2 focus:ring-[#193495]
                 ${
                   isActive
@@ -86,7 +87,7 @@ const BrandChips = ({ onBrandChange }) => {
           );
         })}
 
-        {/* More button */}
+        {/* More button (...) according to UI */}
         <button
           className="flex items-center justify-center h-[57px] w-[57px] rounded-[15px] border-2 border-black bg-white text-[22px] text-black hover:border-[#193495] transition-colors focus:outline-none"
           aria-label="More brands"
