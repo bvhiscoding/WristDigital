@@ -8,6 +8,9 @@ import AccessoriesPage from "./pages/AccessoriesPage/AccessoriesPage.jsx";
 import BlogsPage from "./pages/BlogsPage/BlogsPage.jsx";
 import CartPage from "./pages/CartPage/CartPage.jsx";
 import MyOrdersPage from "./pages/MyOrdersPage/MyOrdersPage.jsx";
+import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
+import WishlistPage from "./pages/WishlistPage/WishlistPage.jsx";
+import SupportPage from "./pages/SupportPage/SupportPage.jsx";
 
 export default function App() {
   return (
@@ -26,6 +29,9 @@ export default function App() {
           <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/my-orders" element={<MyOrdersPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/help" element={<SupportPage />} />
         </Routes>
       </Layout>
     </main>

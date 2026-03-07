@@ -51,7 +51,10 @@ function Header() {
     location.pathname.startsWith("/blogs") ||
     location.pathname.startsWith("/sale") ||
     location.pathname.startsWith("/my-orders") ||
-    location.pathname.startsWith("/cart");
+    location.pathname.startsWith("/cart") ||
+    location.pathname.startsWith("/profile") ||
+    location.pathname.startsWith("/wishlist") ||
+    location.pathname.startsWith("/help");
 
   const isProductDetails = location.pathname.startsWith("/product-details");
 
@@ -315,34 +318,34 @@ function Footer() {
           </h3>
           <ul className="flex flex-col gap-4">
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/help?tab=delivery" className="hover:underline">
                 Delivery Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/help?tab=return-refund" className="hover:underline">
                 Return & Refund Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/help?tab=privacy" className="hover:underline">
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/help?tab=terms" className="hover:underline">
                 Terms of Service
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/help?tab=how-to-order" className="hover:underline">
                 How to Order
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <Link to="/help?tab=faq" className="hover:underline">
                 FAQ
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

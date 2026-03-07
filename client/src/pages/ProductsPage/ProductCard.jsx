@@ -55,8 +55,9 @@ const ProductCard = ({
   reviews = "100",
   image,
   brandLogo,
+  initialWishlist = false,
 }) => {
-  const [wishlisted, setWishlisted] = useState(false);
+  const [wishlisted, setWishlisted] = useState(initialWishlist);
 
   // Link to details (for demo purposes, linking id=1 or all to product-details)
   const detailUrl = id === 1 ? "/product-details" : "#";
