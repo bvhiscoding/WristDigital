@@ -11,6 +11,7 @@ import MyOrdersPage from "./pages/MyOrdersPage/MyOrdersPage.jsx";
 import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 import WishlistPage from "./pages/WishlistPage/WishlistPage.jsx";
 import SupportPage from "./pages/SupportPage/SupportPage.jsx";
+import FloatingChat from "./components/FloatingChat.jsx";
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/help" element={<SupportPage />} />
         </Routes>
       </Layout>
+      <FloatingChat />
     </main>
   );
 }
