@@ -14,6 +14,7 @@ const SupportPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("delivery");
+  const [showFloatingContact, setShowFloatingContact] = useState(true);
 
   // Read the ?tab=xxx query param on load or location change
   useEffect(() => {
@@ -683,10 +684,33 @@ const SupportPage = () => {
       </div>
 
       {/* Floating Sticky Contact Component (Laptop/Desktop) */}
-      <div className="fixed bottom-10 right-10 z-50 hidden lg:block w-[360px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-[24px] hover:-translate-y-2 transition-transform duration-300 ease-out">
-        <div className="bg-gradient-to-br from-[#0c1950] to-[#12246b] rounded-[24px] p-8 text-white relative overflow-hidden border border-white/10">
-          {/* Card visual noise */}
-          <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+      {showFloatingContact && (
+        <div className="fixed bottom-40 right-10 z-50 hidden lg:block w-[360px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-[24px] hover:-translate-y-2 transition-transform duration-300 ease-out">
+          <div className="bg-gradient-to-br from-[#0c1950] to-[#12246b] rounded-[24px] p-8 text-white relative overflow-hidden border border-white/10">
+            {/* Close Button */}
+            <button
+              onClick={() => setShowFloatingContact(false)}
+              className="absolute top-4 right-4 z-10 text-white/50 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+              aria-label="Close"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+
+            {/* Card visual noise */}
+            <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
 
           <h3 className="text-[24px] font-[900] uppercase tracking-wide mb-3 leading-tight drop-shadow-md">
             Need Direct <br /> Assistance?
@@ -755,6 +779,7 @@ const SupportPage = () => {
           </button>
         </div>
       </div>
+      )}
     </div>
   );
 };
