@@ -54,7 +54,8 @@ function Header() {
     location.pathname.startsWith("/cart") ||
     location.pathname.startsWith("/profile") ||
     location.pathname.startsWith("/wishlist") ||
-    location.pathname.startsWith("/help");
+    location.pathname.startsWith("/help") ||
+    location.pathname.startsWith("/settings");
 
   const isProductDetails = location.pathname.startsWith("/product-details");
 
@@ -183,6 +184,7 @@ function Header() {
               <div className="absolute top-[calc(100%+8px)] right-0 w-[205px] bg-white rounded-[18px] shadow-[0px_1px_8px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col items-center py-3 z-50">
                 <Link
                   to="/profile"
+                  onClick={() => setIsDropdownOpen(false)}
                   className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
                 >
                   <img
@@ -210,6 +212,7 @@ function Header() {
                 </Link>
                 <Link
                   to="/wishlist"
+                  onClick={() => setIsDropdownOpen(false)}
                   className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
                 >
                   <img
@@ -224,6 +227,7 @@ function Header() {
                 <div className="w-[85%] h-[1px] bg-gray-200/80 my-2"></div>
                 <Link
                   to="/settings"
+                  onClick={() => setIsDropdownOpen(false)}
                   className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
                 >
                   <img
@@ -232,11 +236,12 @@ function Header() {
                     className="w-[18px] h-[18px] opacity-80 group-hover:opacity-100"
                   />
                   <span className="text-[13px] font-['Inter:Medium',sans-serif] font-medium text-black">
-                    Setting
+                    Settings
                   </span>
                 </Link>
                 <Link
                   to="/help"
+                  onClick={() => setIsDropdownOpen(false)}
                   className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
                 >
                   <img
@@ -249,7 +254,8 @@ function Header() {
                   </span>
                 </Link>
                 <Link
-                  to="/signout"
+                  to="/login"
+                  onClick={() => setIsDropdownOpen(false)}
                   className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group mt-2"
                 >
                   <img
