@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProductCard from "../../components/ProductCard";
 import Dropdown from "../../components/Dropdown";
 import Pagination from "../../components/Pagination";
-import { allProducts } from "./productsData";
+import { useGetProductsQuery } from "../../features/catalog/catalogApi";
 
 const ITEMS_PER_PAGE_OPTIONS = [9, 12, 24];
 
@@ -13,24 +13,39 @@ const SORT_OPTIONS = [
   "Best Rating",
 ];
 
+const SORT_TO_API = {
+  "Price: High to Low": "price_desc",
+  "Price: Low to High": "price_asc",
+  Newest: "newest",
+  "Best Rating": "rating_desc",
+};
+
 const ProductsGrid = () => {
   const [sortBy, setSortBy] = useState("Price: High to Low");
   const [itemsPerPage, setItemsPerPage] = useState(9);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const sorted = [...allProducts].sort((a, b) => {
-    const pa = parseInt(a.price.replace(/\D/g, ""), 10);
-    const pb = parseInt(b.price.replace(/\D/g, ""), 10);
-    if (sortBy === "Price: High to Low") return pb - pa;
-    if (sortBy === "Price: Low to High") return pa - pb;
-    if (sortBy === "Best Rating")
-      return parseFloat(b.rating) - parseFloat(a.rating);
-    return 0;
+  const { data, isLoading, isFetching, isError } = useGetProductsQuery({
+    page: currentPage,
+    limit: itemsPerPage,
+    sort: SORT_TO_API[sortBy],
   });
 
-  const totalPages = Math.ceil(sorted.length / itemsPerPage);
-  const startIdx = (currentPage - 1) * itemsPerPage;
-  const paged = sorted.slice(startIdx, startIdx + itemsPerPage);
+  const items = data?.data?.items ?? [];
+  const pagination = data?.data?.pagination;
+  const totalPages = pagination?.totalPages ?? 1;
+
+  const mappedProducts = items.map((item) => ({
+    id: item._id,
+    slug: item.slug,
+    name: item.name,
+    price: item.displayPrice ?? item.discountPrice ?? item.price,
+    rating: Number(item.averageRating || 0).toFixed(1),
+    reviews: item.numReviews ?? 0,
+    image: item.images?.[0] || "/ProductsPage/apple-watch-ultra-3.png",
+    brandName: item.brand?.name,
+    detailUrl: "/product-details",
+  }));
 
   return (
     <div className="flex flex-col gap-4 flex-grow min-w-0">
@@ -63,7 +78,25 @@ const ProductsGrid = () => {
 
       {/* Product List Grid Container */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
-        {paged.map((product) => (
+        {(isLoading || isFetching) && (
+          <p className="col-span-full text-center text-[#675e5e] font-['Lato'] text-[18px] py-8">
+            Loading products...
+          </p>
+        )}
+
+        {!isLoading && !isFetching && isError && (
+          <p className="col-span-full text-center text-red-500 font-['Lato'] text-[18px] py-8">
+            Failed to load products. Please try again.
+          </p>
+        )}
+
+        {!isLoading && !isFetching && !isError && mappedProducts.length === 0 && (
+          <p className="col-span-full text-center text-[#675e5e] font-['Lato'] text-[18px] py-8">
+            No products found.
+          </p>
+        )}
+
+        {!isLoading && !isFetching && !isError && mappedProducts.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
       </div>

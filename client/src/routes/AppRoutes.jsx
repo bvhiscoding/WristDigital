@@ -23,6 +23,7 @@ import MyOrdersPage from "../pages/MyOrdersPage/MyOrdersPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import WishlistPage from "../pages/WishlistPage/WishlistPage";
 import SettingsPage from "../pages/SettingsPage/SettingsPage";
+import AdminPage from "../pages/AdminPage/AdminPage";
 
 // Route guards
 import PrivateRoute from "./PrivateRoute";
@@ -46,6 +47,16 @@ const AppRoutes = () => {
       {/* ─── Auth pages (no layout) ─────────────────────────────── */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+
+      {/* ─── Admin pages (Standalone Layout) ────────────────────── */}
+      <Route
+        path="/admin/*"
+        element={
+          <AdminRoute>
+            <AdminPage />
+          </AdminRoute>
+        }
+      />
 
       {/* ─── All other pages (with Layout) ──────────────────────── */}
       <Route
@@ -104,16 +115,6 @@ const AppRoutes = () => {
                     </PrivateRoute>
                   }
                 />
-
-                {/* Admin routes — placeholder, sẽ bổ sung sau */}
-                {/* <Route
-                  path="/admin/*"
-                  element={
-                    <AdminRoute>
-                      <AdminDashboard />
-                    </AdminRoute>
-                  }
-                /> */}
               </Routes>
             </Layout>
             <FloatingChat />

@@ -284,6 +284,33 @@ function Header() {
 
                   <div className="w-[85%] h-[1px] bg-gray-200/80 my-2" />
 
+                  {/* Admin link temporarily rendered for testing */}
+                  <Link
+                    to="/admin"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-gray-100 transition-colors my-0.5 group"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="opacity-80 group-hover:opacity-100 text-black"
+                    >
+                      <rect width="18" height="18" x="3" y="3" rx="2" />
+                      <path d="M3 9h18" />
+                      <path d="M9 21V9" />
+                    </svg>
+                    <span className="text-[13px] font-medium text-black">
+                      Admin Dashboard
+                    </span>
+                  </Link>
+
                   <button
                     onClick={handleSignOut}
                     className="flex items-center gap-3 w-[181px] h-[34px] px-3 rounded-[10px] hover:bg-red-50 transition-colors my-0.5 group"

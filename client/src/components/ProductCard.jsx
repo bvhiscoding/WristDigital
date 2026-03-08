@@ -37,10 +37,18 @@ const ProductCard = ({
   reviews = "100",
   image,
   brandLogo,
+  brandName,
+  detailUrl,
   initialWishlist = false,
 }) => {
   const [wishlisted, setWishlisted] = useState(initialWishlist);
-  const detailUrl = id === 1 ? "/product-details" : "#";
+
+  const resolvedDetailUrl = detailUrl || (id === 1 ? "/product-details" : "#");
+
+  const displayPrice =
+    typeof price === "number" ? price.toLocaleString("vi-VN") : String(price || "");
+
+  const displayRating = Number(rating || 0).toFixed(1);
 
   return (
     <article className="relative bg-white flex flex-col h-full group overflow-hidden rounded-[20px] shadow-sm hover:shadow-md transition-shadow">
@@ -54,22 +62,28 @@ const ProductCard = ({
       </button>
 
       {/* Brand badge */}
-      {brandLogo && (
+      {(brandLogo || brandName) && (
         <div
           className="absolute top-3 left-3 z-10"
           style={{ width: 90, height: 30, overflow: "hidden" }}
         >
-          <img
-            src={brandLogo}
-            alt="Brand"
-            style={{ width: 90, height: 30, objectFit: "contain", objectPosition: "left center" }}
-          />
+          {brandLogo ? (
+            <img
+              src={brandLogo}
+              alt={brandName || "Brand"}
+              style={{ width: 90, height: 30, objectFit: "contain", objectPosition: "left center" }}
+            />
+          ) : (
+            <span className="inline-flex h-[30px] px-3 items-center rounded-full bg-[#f4f6ff] text-[#193495] text-[12px] font-semibold">
+              {brandName}
+            </span>
+          )}
         </div>
       )}
 
       {/* Product image */}
       <Link
-        to={detailUrl}
+        to={resolvedDetailUrl}
         className="w-full aspect-square flex items-center justify-center p-6 overflow-hidden bg-white group-hover:opacity-90 transition-opacity"
       >
         <img
@@ -81,21 +95,21 @@ const ProductCard = ({
 
       {/* Info */}
       <div className="flex flex-col gap-2 px-4 pt-2 pb-4 flex-grow">
-        <Link to={detailUrl} className="hover:text-[#193495] transition-colors">
+        <Link to={resolvedDetailUrl} className="hover:text-[#193495] transition-colors">
           <h3 className="text-[22px] font-bold text-black text-center font-['Lato'] leading-tight">
             {name}
           </h3>
         </Link>
 
         <p className="text-[20px] font-semibold text-black text-center font-['Lato']">
-          {price}
+          {displayPrice}
           <span className="underline decoration-solid ml-0.5">{priceUnit}</span>
         </p>
 
         <div className="flex items-center gap-1 justify-start">
           <StarIcon />
           <span className="text-[#675e5e] text-[15px] font-['Lato']">
-            {rating} ({reviews} reviews)
+            {displayRating} ({reviews} reviews)
           </span>
         </div>
 
