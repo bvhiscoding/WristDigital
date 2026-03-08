@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ProductCard from "../../components/ProductCard";
 import Dropdown from "../../components/Dropdown";
 import Pagination from "../../components/Pagination";
 import { useGetProductsQuery } from "../../features/catalog/catalogApi";
+import { getBrandLogo } from "./brandLogoMap";
 
 const ITEMS_PER_PAGE_OPTIONS = [9, 12, 24];
 
@@ -20,20 +21,44 @@ const SORT_TO_API = {
   "Best Rating": "rating_desc",
 };
 
-const ProductsGrid = () => {
+const ProductsGrid = ({ queryFilters }) => {
   const [sortBy, setSortBy] = useState("Price: High to Low");
   const [itemsPerPage, setItemsPerPage] = useState(9);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading, isFetching, isError } = useGetProductsQuery({
-    page: currentPage,
-    limit: itemsPerPage,
-    sort: SORT_TO_API[sortBy],
-  });
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [queryFilters?.search, queryFilters?.brand, queryFilters?.category, queryFilters?.minPrice, queryFilters?.maxPrice]);
+
+  const params = useMemo(() => {
+    const next = {
+      page: currentPage,
+      limit: itemsPerPage,
+      sort: SORT_TO_API[sortBy],
+    };
+
+    if (queryFilters?.search) next.search = queryFilters.search;
+    if (queryFilters?.brand) next.brand = queryFilters.brand;
+    if (queryFilters?.category) next.category = queryFilters.category;
+    if (queryFilters?.minPrice !== "" && queryFilters?.minPrice !== undefined)
+      next.minPrice = queryFilters.minPrice;
+    if (queryFilters?.maxPrice !== "" && queryFilters?.maxPrice !== undefined)
+      next.maxPrice = queryFilters.maxPrice;
+
+    return next;
+  }, [currentPage, itemsPerPage, sortBy, queryFilters]);
+
+  const { data, isLoading, isFetching, isError } = useGetProductsQuery(params);
 
   const items = data?.data?.items ?? [];
   const pagination = data?.data?.pagination;
   const totalPages = pagination?.totalPages ?? 1;
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
+    }
+  }, [currentPage, totalPages]);
 
   const mappedProducts = items.map((item) => ({
     id: item._id,
@@ -44,6 +69,7 @@ const ProductsGrid = () => {
     reviews: item.numReviews ?? 0,
     image: item.images?.[0] || "/ProductsPage/apple-watch-ultra-3.png",
     brandName: item.brand?.name,
+    brandLogo: getBrandLogo(item.brand),
     detailUrl: "/product-details",
   }));
 

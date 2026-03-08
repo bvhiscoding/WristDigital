@@ -74,9 +74,7 @@ const ProductCard = ({
               style={{ width: 90, height: 30, objectFit: "contain", objectPosition: "left center" }}
             />
           ) : (
-            <span className="inline-flex h-[30px] px-3 items-center rounded-full bg-[#f4f6ff] text-[#193495] text-[12px] font-semibold">
-              {brandName}
-            </span>
+            <span className="text-black text-[14px] font-['Lato']">{brandName}</span>
           )}
         </div>
       )}

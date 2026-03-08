@@ -1,6 +1,11 @@
 import React from "react";
 
-const SearchSection = () => {
+const SearchSection = ({ value, onChange, onSubmit }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit?.();
+  };
+
   return (
     <section className="relative w-full max-w-[1440px] mx-auto px-4 md:px-12 mt-12 mb-8">
       <div className="relative w-full h-[350px] rounded-[20px] overflow-hidden flex flex-col items-center justify-center">
@@ -23,18 +28,25 @@ const SearchSection = () => {
           </h2>
 
           {/* Search Bar Input Container */}
-          <div className="relative w-full max-w-[800px] h-[70px] bg-white/80 backdrop-blur-sm rounded-full flex items-center px-8 shadow-lg transition-transform hover:scale-[1.02]">
-            <img
-              src="/ProductsPage/search-icon.svg"
-              alt="Search"
-              className="w-8 h-8 opacity-70"
-            />
+          <form
+            onSubmit={handleSubmit}
+            className="relative w-full max-w-[800px] h-[70px] bg-white/80 backdrop-blur-sm rounded-full flex items-center px-8 shadow-lg transition-transform hover:scale-[1.02]"
+          >
+            <button type="submit" className="shrink-0" aria-label="Search products">
+              <img
+                src="/ProductsPage/search-icon.svg"
+                alt="Search"
+                className="w-8 h-8 opacity-70"
+              />
+            </button>
             <input
               type="text"
+              value={value}
+              onChange={(e) => onChange?.(e.target.value)}
               placeholder="Search..."
               className="w-full h-full bg-transparent border-none outline-none text-[#193495] text-xl ml-6 placeholder-[#193495]/60 font-['Lato']"
             />
-          </div>
+          </form>
         </div>
       </div>
     </section>
