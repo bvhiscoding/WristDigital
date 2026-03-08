@@ -54,7 +54,8 @@ function Header() {
     location.pathname.startsWith("/profile") ||
     location.pathname.startsWith("/wishlist") ||
     location.pathname.startsWith("/help") ||
-    location.pathname.startsWith("/settings");
+    location.pathname.startsWith("/settings") ||
+    location.pathname.startsWith("/blogs/");
 
   // Nav link active helper
   const navLinkClass = (active) =>

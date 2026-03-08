@@ -14,7 +14,7 @@ export const heroPost = {
   excerpt:
     "You bought a waterproof Smartwatch, but do you know exactly how much pressure it can handle? How do the ATM (Atmospheric Pressure) and IP68 (Ingress Protection) standards differ? Don't let a misunderstanding ruin your watch. Read our detailed guide now to protect your device during a swim or in the rain...",
   date: "Nov 15, 2026",
-  readMoreLink: "#",
+  readMoreLink: "/blogs/atm-vs-ip68",
 };
 
 // ------- Trending -------
@@ -28,7 +28,7 @@ export const trendingPosts = [
     excerpt:
       "Compare strap materials for high-intensity, prolonged exercise: Nylon Loop (ultra-light, breathable), Sport Silicone (sweatproof, easy to clean), and Trail Loop (durable, quick adjustment)...",
     date: "Nov 15, 2025",
-    readMoreLink: "#",
+    readMoreLink: "/blogs/strap-marathon",
     size: "large",
   },
   {
@@ -39,7 +39,7 @@ export const trendingPosts = [
       "Transform Your Smartwatch into a Bike Computer: Handlebar Mount Guide",
     excerpt: "",
     date: "Nov 15, 2025",
-    readMoreLink: "#",
+    readMoreLink: "/blogs/bike-computer",
     size: "small",
   },
 ];

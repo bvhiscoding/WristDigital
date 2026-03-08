@@ -15,6 +15,7 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import AccessoriesPage from "../pages/AccessoriesPage/AccessoriesPage";
 import SalePage from "../pages/SalePage/SalePage";
 import BlogsPage from "../pages/BlogsPage/BlogsPage";
+import BlogDetails from "../pages/BlogDetails/BlogDetails";
 import SupportPage from "../pages/SupportPage/SupportPage";
 
 // Private pages (require login)
@@ -72,6 +73,7 @@ const AppRoutes = () => {
                 <Route path="/accessories" element={<AccessoriesPage />} />
                 <Route path="/sale" element={<SalePage />} />
                 <Route path="/blogs" element={<BlogsPage />} />
+                <Route path="/blogs/:id" element={<BlogDetails />} />
                 <Route path="/help" element={<SupportPage />} />
 
                 {/* Private routes — require authentication */}
