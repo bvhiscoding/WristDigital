@@ -1,0 +1,17 @@
+import "../auth/authApi";
+import "../user/userApi";
+import "../catalog/catalogApi";
+import "../cart/cartApi";
+import "../order/orderApi";
+import "../review/reviewApi";
+import "../wishlist/wishlistApi";
+import "../blog/blogApi";
+import "../admin/adminBrandApi";
+import "../admin/adminCategoryApi";
+import "../admin/adminProductApi";
+import "../admin/adminOrderApi";
+import "../admin/adminCouponApi";
+import "../admin/adminSaleApi";
+import "../admin/adminDashboardApi";
+import "../admin/adminReviewApi";
+import "../admin/adminBlogApi";
