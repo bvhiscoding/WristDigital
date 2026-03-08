@@ -42,6 +42,7 @@ const createProductSchema = z.object({
       }),
     )
     .optional(),
+  watchBandOptions: z.array(z.string().min(1)).optional(),
   isActive: z.boolean().optional(),
 });
 

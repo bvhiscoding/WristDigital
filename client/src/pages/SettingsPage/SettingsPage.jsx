@@ -101,6 +101,7 @@ const SettingsPage = () => {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 mb-10">
           <div>
             <h1 className="text-[28px] md:text-[36px] font-[900] text-[#193495] uppercase tracking-wide">
+              {/* ── Page Title ── */}
               SETTINGS
             </h1>
             <p className="text-[15px] md:text-[16px] text-[#0c1950]/65 mt-2">
@@ -118,6 +119,7 @@ const SettingsPage = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-7">
+          {/* ── Left Sidebar: Profile Summary & Quick Links ── */}
           <aside className="lg:sticky lg:top-[130px] h-fit">
             <div className="rounded-[20px] border border-[#193495]/15 bg-[#eaf0ff]/35 p-6">
               <div className="flex items-center gap-4">
@@ -165,6 +167,7 @@ const SettingsPage = () => {
           </aside>
 
           <form onSubmit={handleSave} className="flex flex-col gap-7">
+            {/* ── Main Content: Sections (Account, Security, Notifications, etc.) ── */}
             <section
               id="account"
               className="rounded-[20px] border border-[#193495]/15 bg-white shadow-[0_8px_24px_rgba(10,25,80,0.05)] p-6 md:p-8"
@@ -505,4 +508,3 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
-

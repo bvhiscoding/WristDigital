@@ -57,6 +57,7 @@ const productSchema = new mongoose.Schema(
     numReviews: { type: Number, default: 0 },
     specifications: { type: mongoose.Schema.Types.Mixed, default: {} },
     colors: [colorSchema],
+    watchBandOptions: [{ type: String, trim: true }],
     activeSale: { type: activeSaleSchema, default: null },
     isActive: { type: Boolean, default: true },
   },

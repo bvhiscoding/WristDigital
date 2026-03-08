@@ -8,6 +8,7 @@ const WishlistPage = () => {
 
   return (
     <div className="w-full min-h-screen bg-white pb-20 pt-[120px] lg:pt-[151px]">
+      {/* ── Main Content Container ── */}
       <div className="max-w-[1211px] mx-auto px-5 xl:px-0">
         {/* Header: Title */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12 lg:mb-16">
@@ -17,12 +18,14 @@ const WishlistPage = () => {
         </div>
 
         {wishlistedProducts.length > 0 ? (
+          /* ── Product List Grid (3 columns on Desktop) ── */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {wishlistedProducts.map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}
           </div>
         ) : (
+          /* ── Empty State Message ── */
           <div className="text-center py-20 text-[20px] font-['Lato'] text-[#0c1950]/60">
             Your wishlist is empty.
           </div>
