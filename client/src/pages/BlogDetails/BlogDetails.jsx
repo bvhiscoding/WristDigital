@@ -17,7 +17,7 @@ export default function BlogDetails() {
 
       {/* ── Page ──────────────────────────────────────────────── */}
       <div className="w-full flex flex-col bg-white min-h-screen pt-[120px] pb-24 font-['Lato:Regular',sans-serif]">
-        <div className="max-w-[860px] mx-auto w-full px-6 md:px-12">
+        <div className="max-w-[1211px] mx-auto w-full px-5 xl:px-0">
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-[14px] text-gray-500 mb-8 font-['Lato:Regular',sans-serif]">
